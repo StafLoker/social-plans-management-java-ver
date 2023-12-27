@@ -1,6 +1,7 @@
 package org.stafloker.data.models.msp;
 
 import lombok.*;
+import org.stafloker.data.models.exceptions.InvalidAttributeException;
 
 import javax.persistence.*;
 
@@ -32,5 +33,13 @@ public class Activity {
 
     public Double getPrice(Integer age) {
         return this.price;
+    }
+
+    public void setCapacity(Integer capacity) {
+        if (capacity < MIN_CAPACITY) {
+            throw new InvalidAttributeException("Minimum capacity is " + MIN_CAPACITY + ": " + capacity);
+        }
+        this.capacity = capacity;
+
     }
 }
