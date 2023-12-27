@@ -1,6 +1,7 @@
 package org.stafloker.data.repositories.repositories_sql;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.stafloker.data.models.User;
 import org.stafloker.data.repositories.UserRepository;
@@ -10,6 +11,8 @@ import java.util.Optional;
 
 @Repository
 public class UserRepositorySql extends GenericRepositorySql<User> implements UserRepository {
+
+    @Autowired
     public UserRepositorySql(Session session) {
         super(session);
     }

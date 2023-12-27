@@ -1,0 +1,37 @@
+package org.stafloker.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.stafloker.data.models.User;
+import org.stafloker.data.repositories.UserRepository;
+import org.stafloker.services.exceptions.DuplicateException;
+import org.stafloker.services.exceptions.SecurityAuthorizationException;
+
+@Service
+public class UserService {
+    private final UserRepository userRepository;
+
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public User create(User user) {
+        this.userRepository.searchByName(user.getName())
+                .ifPresent(existingUser -> {
+                    throw new DuplicateException("The username already exists and must be unique: " + user.getName());
+                });
+        this.userRepository.searchByMobile(user.getMobile())
+                .ifPresent(existingUser -> {
+                    throw new DuplicateException("The mobile number already exists and must be unique: " + user.getMobile());
+                });
+        return this.userRepository.create(user);
+    }
+
+    public User login(String username, String password) {
+        return this.userRepository.searchByName(username)
+                .filter(user -> user.getPassword().equals(password))
+                .orElseThrow(() -> new SecurityAuthorizationException("Unauthorized credentials"));
+    }
+}
+
