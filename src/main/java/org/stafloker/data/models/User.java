@@ -4,7 +4,6 @@ import lombok.*;
 import org.stafloker.data.models.exceptions.InvalidAttributeException;
 
 import javax.persistence.*;
-import java.nio.file.LinkOption;
 
 @Data
 @NoArgsConstructor
@@ -31,6 +30,7 @@ public class User {
     private String password;
     @Column(nullable = false)
     private Integer age;
+
 
     public void setPassword(String password) {
         if (password.length() < MIN_LONG_PASSWORD) {

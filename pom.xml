@@ -9,6 +9,12 @@
 
     <name>management-of-social-plans</name>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.14</version>
+    </parent>
+
     <properties>
         <!-- Encode -->
         <encoding>UTF-8</encoding>
@@ -18,8 +24,6 @@
         <!-- Maven -->
         <maven.compiler.version>3.10.1</maven.compiler.version>
         <maven.compile.source>19</maven.compile.source>
-        <!-- Spring -->
-        <org.springframework.version>6.1.0</org.springframework.version>
         <!-- Lombok -->
         <lombok.version>1.18.22</lombok.version>
         <!-- Database -->
@@ -32,11 +36,11 @@
     </properties>
 
     <dependencies>
-        <!-- Spring -->
+        <!-- =============== Spring =============== -->
+        <!-- Security -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${org.springframework.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <!-- Lombok -->
         <dependency>
