@@ -20,6 +20,8 @@
         <maven.compile.source>19</maven.compile.source>
         <!-- Spring -->
         <org.springframework.version>6.1.0</org.springframework.version>
+        <!-- Lombok -->
+        <lombok.version>1.18.22</lombok.version>
         <!-- Database -->
         <mysql.version>8.0.33</mysql.version>
         <org.hibernate.version>6.0.0.Alpha2</org.hibernate.version>
@@ -36,21 +38,27 @@
             <artifactId>spring-core</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
         <!-- =============== Databases =============== -->
-        <!-- MySQL Connector -->
+            <!-- MySQL Connector -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
-        <!-- Hibernate -->
+            <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${org.hibernate.version}</version>
         </dependency>
         <!-- =============== Logs =============== -->
-        <!-- Log4j -->
+            <!-- Log4j -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
@@ -67,7 +75,7 @@
             <version>${log4j.version}</version>
         </dependency>
         <!-- =============== Tests =============== -->
-        <!-- JUnit5 -->
+            <!-- JUnit5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
