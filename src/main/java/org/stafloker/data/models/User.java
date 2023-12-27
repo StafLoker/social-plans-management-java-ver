@@ -4,11 +4,13 @@ import lombok.*;
 import org.stafloker.data.models.exceptions.InvalidAttributeException;
 
 import javax.persistence.*;
+import java.nio.file.LinkOption;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "users")
 public class User {
@@ -17,9 +19,10 @@ public class User {
     private static final int MIN_LONG_PASSWORD = 3;
 
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue
     @Column
-    private Integer id;
+    private Long id;
     @Column(nullable = false, unique = true)
     private String name;
     @Column(nullable = false, unique = true)

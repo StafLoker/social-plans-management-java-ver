@@ -4,11 +4,13 @@ import lombok.*;
 import org.stafloker.data.models.exceptions.InvalidAttributeException;
 
 import javax.persistence.*;
+import java.nio.file.LinkOption;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "activities")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -17,9 +19,10 @@ public class Activity {
     private static final int MIN_CAPACITY = 1;
 
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue
     @Column
-    private Integer id;
+    private Long id;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
