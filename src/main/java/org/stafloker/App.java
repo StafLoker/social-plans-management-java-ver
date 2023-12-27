@@ -1,4 +1,4 @@
-package org.example;
+package org.stafloker;
 
 public class App {
 
