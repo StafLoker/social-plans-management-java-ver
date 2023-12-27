@@ -130,7 +130,7 @@ public class PlanService {
                 .toList();
     }
 
-    public List<Plan> plansWithKeyword(String keyword) {
+    public List<Plan> plansContainingKeyword(String keyword) {
         return this.availablePlans().stream()
                 .filter(plan -> plan.getActivitiesList().stream()
                         .anyMatch(activity -> activity.getName().contains(keyword) || activity.getDescription().contains(keyword)))
