@@ -29,7 +29,8 @@
         <mapping class="org.stafloker.data.models.User"/>
         <mapping class="org.stafloker.data.models.msp.Plan"/>
         <mapping class="org.stafloker.data.models.msp.Activity"/>
-
+        <mapping class="org.stafloker.data.models.msp.activityType.Cinema"/>
+        <mapping class="org.stafloker.data.models.msp.activityType.Theater"/>
     </session-factory>
 
 </hibernate-configuration>
