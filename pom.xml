@@ -18,32 +18,47 @@
         <!-- Maven -->
         <maven.compiler.version>3.10.1</maven.compiler.version>
         <maven.compile.source>19</maven.compile.source>
-        <!-- JUnit -->
-        <junit.jupiter.version>5.9.3</junit.jupiter.version>
-        <!-- Logs -->
-        <log4j.version>2.20.0</log4j.version>
+        <!-- Spring -->
+        <org.springframework.version>6.1.0</org.springframework.version>
+        <!-- Lombok -->
+        <lombok.version>1.18.22</lombok.version>
         <!-- Database -->
         <mysql.version>8.0.33</mysql.version>
         <org.hibernate.version>6.0.0.Alpha2</org.hibernate.version>
-        <!-- Spring -->
-        <org.springframework.version>6.1.0</org.springframework.version>
+        <!-- Logs -->
+        <log4j.version>2.20.0</log4j.version>
+        <!-- JUnit -->
+        <junit.jupiter.version>5.9.3</junit.jupiter.version>
     </properties>
 
     <dependencies>
-        <!-- JUnit5 -->
+        <!-- Spring -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.jupiter.version}</version>
-            <scope>test</scope>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${org.springframework.version}</version>
         </dependency>
+        <!-- Lombok -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.jupiter.version}</version>
-            <scope>test</scope>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
         </dependency>
-        <!-- Logs -->
+        <!-- =============== Databases =============== -->
+            <!-- MySQL Connector -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+            <!-- Hibernate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${org.hibernate.version}</version>
+        </dependency>
+        <!-- =============== Logs =============== -->
+            <!-- Log4j -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
@@ -59,22 +74,19 @@
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>${log4j.version}</version>
         </dependency>
-        <!-- Databases -->
+        <!-- =============== Tests =============== -->
+            <!-- JUnit5 -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>${org.hibernate.version}</version>
-        </dependency>
-        <!-- Spring -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${org.springframework.version}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
