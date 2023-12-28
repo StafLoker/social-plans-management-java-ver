@@ -71,3 +71,6 @@ target
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+### Personal ##@
+logs/

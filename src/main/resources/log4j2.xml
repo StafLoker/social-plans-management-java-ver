@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Set to debug or trace if log4j initialization is failing -->
+<Configuration status="WARN">
+    <!-- Console appender configuration -->
+    <Appenders>
+        <File name="file" fileName="logs/app.log">
+            <PatternLayout pattern="%highlight{[%d{yyyy-MM-dd HH:mm:ss}] %-5p %c{2} => %style{%m%n}{bright_white}}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=green, DEBUG=white, TRACE=blue}" />
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <!-- Root logger level: trace debug info warn error fatal -->
+        <Root level="debug">
+            <!-- Root logger referring to console appender -->
+            <AppenderRef ref="file" />
+        </Root>
+    </Loggers>
+
+</Configuration>

@@ -1,0 +1,50 @@
+COMMANDS MADE TO TEST THE FUNCTIONALITY
+
+create-user: Peter; 123; 20; 123 456 789
+login: Peter; 123
+create-plan: Beers; 20-07-2024 20.00; Nuevos Ministerios
+create-activity: Drinks; Drinks for friends; 30; 20.15; Generic
+create-activity: Weekend party; Just for friends; 90; 23.35; Cinema; 15
+plan-add-activity: 7; 8
+plan-add-activity: 7; 9
+plan-join: 7
+subscribed-plans
+
+
+login: root; root
+available-plans
+delete-plan: 1
+plan-join: 7
+
+<<---------------------------------------------->>
+
+SPL
+
+Seeder - for App development only.
+Population content:
+    - All plans have the same owner "root".
+    - Range id_u(1-6) ; id_a(1-7) ; id_p(1-6).
+
+(Plan0): id.1
+    - Participants: id.1 - id.5 "root" - "User4".
+    - Activities: id.3 "2-Cinema", id.5 "4-Beer", id.6 "5-Pizza".
+
+(Plan1): id.2
+    - Participants: id.1 - id.5 "root" - "User4
+    - Activities: id.1 "0-Theater", id.2 "1-Musical",
+
+(Plan2): id.3
+    - Participants: id.1 - id.5 "root" - "User4".
+    - Activities: id.3 "2-Cinema".
+
+(Plan3): id.4
+     - Participants: Nobody
+     - Activities: id.4 "3-Cinema", id.5 "4-Beer" (Plan4): id.5 "4-Beer" (Plan5): id.5 "4-Beer".
+
+(Plan4): id.5
+    - Participants: Nobody
+    - Activities: id.5 "4-Beers", id.5 "4-Beers" (Plan5): id.6
+
+(Plan5): id.6
+    - Participants: Nobody
+    - Activities: id.7 "6-Party".
