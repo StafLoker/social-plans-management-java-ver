@@ -62,7 +62,7 @@ public class Plan {
         this.subscribersList.add(user);
     }
 
-    public Integer getNumberOfVacancies() {
+    public Integer getAvailableSpots() {
         if (Objects.isNull(this.capacity)) {
             return null;
         }
