@@ -1,10 +1,12 @@
 package org.stafloker.console;
 
+import org.springframework.stereotype.Component;
 import org.stafloker.data.models.User;
 import org.stafloker.services.exceptions.SecurityAuthorizationException;
 
 import java.util.Optional;
 
+@Component
 public class Session {
     private User loggedUser;
 

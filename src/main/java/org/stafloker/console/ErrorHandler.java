@@ -1,11 +1,15 @@
 package org.stafloker.console;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.stafloker.services.exceptions.SecurityProhibitionException;
 
+@Component
 public class ErrorHandler {
     private final CommandLineInterface commandLineInterface;
     private final View view;
 
+    @Autowired
     public ErrorHandler(CommandLineInterface commandLineInterface, View view) {
         this.commandLineInterface = commandLineInterface;
         this.view = view;
