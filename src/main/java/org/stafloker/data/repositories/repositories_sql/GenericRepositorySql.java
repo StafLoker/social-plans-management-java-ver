@@ -80,7 +80,7 @@ public abstract class GenericRepositorySql<T> implements GenericRepository<T> {
             session.beginTransaction();
             session.createQuery("DELETE FROM " + this.getEntityClass().getSimpleName()).executeUpdate();
             session.getTransaction().commit();
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             throw new UnsupportedOperationException("Hibernate: " + e);
         }
     }

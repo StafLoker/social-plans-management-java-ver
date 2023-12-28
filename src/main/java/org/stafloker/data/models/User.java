@@ -4,7 +4,6 @@ import lombok.*;
 import org.stafloker.data.models.exceptions.InvalidAttributeException;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 
 @Data
 @NoArgsConstructor

@@ -3,9 +3,12 @@ package org.stafloker.data.repositories.seeder;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 import org.stafloker.data.models.User;
 import org.stafloker.data.repositories.UserRepository;
+
+import javax.annotation.PostConstruct;
 
 @Repository
 public class DatabaseStarting {
@@ -19,9 +22,10 @@ public class DatabaseStarting {
         this.name = name;
         this.pass = pass;
         this.userRepository = userRepository;
-        this.initialize();
     }
 
+    @Profile("prod")
+    @PostConstruct
     void initialize() {
         LogManager.getLogger(this.getClass()).warn("------- Finding Root -------------");
         if (this.userRepository.searchByName(this.name).isEmpty()) {

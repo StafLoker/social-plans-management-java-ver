@@ -3,6 +3,7 @@ package org.stafloker.data.repositories.seeder;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.context.annotation.Profile;
 import org.stafloker.data.models.spm.Activity;
 import org.stafloker.data.models.spm.Plan;
 import org.stafloker.data.models.spm.activityType.Cinema;
@@ -16,7 +17,8 @@ import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Random;
 
-@Repository //@Profile("dev")
+@Repository
+@Profile({"dev", "test"})
 public class SpmSeederServiceDev {
     private final UserRepository userRepository;
     private final PlanRepository planRepository;
@@ -98,7 +100,7 @@ public class SpmSeederServiceDev {
 
     public void deleteAll() {
         LogManager.getLogger(this.getClass()).warn("------- SPM delete all ----------");
-        this.planRepository.deleteAll();
         this.activityRepository.deleteAll();
+        this.planRepository.deleteAll();
     }
 }

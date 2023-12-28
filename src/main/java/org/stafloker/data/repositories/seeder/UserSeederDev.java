@@ -3,10 +3,12 @@ package org.stafloker.data.repositories.seeder;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.context.annotation.Profile;
 import org.stafloker.data.models.User;
 import org.stafloker.data.repositories.UserRepository;
 
-@Repository // @Profile("dev")
+@Repository
+@Profile({"dev", "test"})
 public class UserSeederDev {
 
     private final DatabaseStarting databaseStarting;
