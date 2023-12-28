@@ -1,6 +1,6 @@
-package org.stafloker.data.models.msp.activityType;
+package org.stafloker.data.models.spm.activityType;
 
-import org.stafloker.data.models.msp.Activity;
+import org.stafloker.data.models.spm.Activity;
 
 import javax.persistence.*;
 

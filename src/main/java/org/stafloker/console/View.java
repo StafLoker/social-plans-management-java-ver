@@ -2,8 +2,8 @@ package org.stafloker.console;
 
 import org.springframework.stereotype.Component;
 import org.stafloker.data.models.User;
-import org.stafloker.data.models.msp.Activity;
-import org.stafloker.data.models.msp.Plan;
+import org.stafloker.data.models.spm.Activity;
+import org.stafloker.data.models.spm.Plan;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;

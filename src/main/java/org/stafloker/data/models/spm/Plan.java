@@ -1,4 +1,4 @@
-package org.stafloker.data.models.msp;
+package org.stafloker.data.models.spm;
 
 import lombok.*;
 

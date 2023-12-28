@@ -27,10 +27,10 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <mapping class="org.stafloker.data.models.User"/>
-        <mapping class="org.stafloker.data.models.msp.Plan"/>
-        <mapping class="org.stafloker.data.models.msp.Activity"/>
-        <mapping class="org.stafloker.data.models.msp.activityType.Cinema"/>
-        <mapping class="org.stafloker.data.models.msp.activityType.Theater"/>
+        <mapping class="org.stafloker.data.models.spm.Plan"/>
+        <mapping class="org.stafloker.data.models.spm.Activity"/>
+        <mapping class="org.stafloker.data.models.spm.activityType.Cinema"/>
+        <mapping class="org.stafloker.data.models.spm.activityType.Theater"/>
     </session-factory>
 
 </hibernate-configuration>

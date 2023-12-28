@@ -1,6 +1,6 @@
 package org.stafloker.console.commands.planCommands;
 
-import org.stafloker.data.models.msp.Plan;
+import org.stafloker.data.models.spm.Plan;
 
 import java.util.Comparator;
 import java.util.LinkedList;
