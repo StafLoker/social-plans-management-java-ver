@@ -1,4 +1,4 @@
-package org.stafloker.data.daos.seeder;
+package org.stafloker.data.daos.seeders;
 
 import jakarta.annotation.PostConstruct;
 import org.apache.logging.log4j.LogManager;

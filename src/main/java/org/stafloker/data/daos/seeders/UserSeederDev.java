@@ -1,4 +1,4 @@
-package org.stafloker.data.daos.seeder;
+package org.stafloker.data.daos.seeders;
 
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +31,12 @@ public class UserSeederDev {
         for (User user : users) {
             this.userRepository.create(user);
         }
+        LogManager.getLogger(this.getClass()).warn("------- Users Initial Load -------");
     }
 
     public void deleteAllAndInitialize() {
         this.userRepository.deleteAll();
-        LogManager.getLogger(this.getClass()).warn("------- Users deleted All -------");
+        LogManager.getLogger(this.getClass()).warn("------- Users Deleted All -------");
         this.databaseStarting.initialize();
     }
 }

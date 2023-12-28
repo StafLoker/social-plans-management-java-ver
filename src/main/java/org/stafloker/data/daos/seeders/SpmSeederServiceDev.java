@@ -1,4 +1,4 @@
-package org.stafloker.data.daos.seeder;
+package org.stafloker.data.daos.seeders;
 
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,10 +96,11 @@ public class SpmSeederServiceDev {
             plan.setOwner(this.userRepository.read(1L).get());
             this.planRepository.create(plan);
         }
+        LogManager.getLogger(this.getClass()).warn("------- Spm Initial Load --------");
     }
 
     public void deleteAll() {
-        LogManager.getLogger(this.getClass()).warn("------- SPM delete all ----------");
+        LogManager.getLogger(this.getClass()).warn("------- Spm Delete All ----------");
         this.activityRepository.deleteAll();
         this.planRepository.deleteAll();
     }
