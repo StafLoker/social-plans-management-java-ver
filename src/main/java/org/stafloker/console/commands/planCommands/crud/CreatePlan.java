@@ -7,7 +7,7 @@ import org.stafloker.console.Command;
 import org.stafloker.console.View;
 import org.stafloker.console.exceptions.UnsupportedAttributesException;
 import org.stafloker.data.models.User;
-import org.stafloker.data.models.msp.Plan;
+import org.stafloker.data.models.spm.Plan;
 import org.stafloker.services.PlanService;
 
 import java.time.LocalDateTime;

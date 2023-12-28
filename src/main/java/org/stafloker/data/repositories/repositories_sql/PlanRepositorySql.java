@@ -1,10 +1,9 @@
 package org.stafloker.data.repositories.repositories_sql;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.stafloker.data.models.msp.Plan;
+import org.stafloker.data.models.spm.Plan;
 import org.stafloker.data.repositories.PlanRepository;
 
 @Repository
