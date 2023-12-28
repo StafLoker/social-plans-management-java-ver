@@ -1,6 +1,7 @@
 package org.stafloker.console;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 
 import java.util.*;
@@ -21,14 +22,21 @@ public class CommandLineInterface {
     private final View view;
 
     @Autowired
-    public CommandLineInterface(View view, Session session) {
-        this.commands = new HashMap<>();
+    public CommandLineInterface(View view, Session session, ApplicationContext context) {
         this.view = view;
         this.session = session;
+        this.commands = this.loadCommands(context);
     }
 
-    public void add(Command command) {
-        this.commands.put(command.value(), command);
+    private Map<String, Command> loadCommands(ApplicationContext context) {
+        Map<String, Command> loadedCommands = new HashMap<>();
+        Map<String, Command> commandBeans = context.getBeansOfType(Command.class);
+
+        for (Command command : commandBeans.values()) {
+            loadedCommands.put(command.value(), command);
+        }
+
+        return loadedCommands;
     }
 
     public boolean runCommands() {
