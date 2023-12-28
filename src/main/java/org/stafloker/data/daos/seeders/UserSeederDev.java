@@ -31,7 +31,7 @@ public class UserSeederDev {
         for (User user : users) {
             this.userRepository.create(user);
         }
-        LogManager.getLogger(this.getClass()).warn("------- Users Initial Load -------");
+        LogManager.getLogger(this.getClass()).warn("------- Users Loaded -------");
     }
 
     public void deleteAllAndInitialize() {

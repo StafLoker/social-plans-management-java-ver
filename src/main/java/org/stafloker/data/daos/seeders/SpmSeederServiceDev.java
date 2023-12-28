@@ -32,6 +32,7 @@ public class SpmSeederServiceDev {
     }
 
     public void seedDatabase() {
+        LogManager.getLogger(this.getClass()).warn("------- Spm Initial Load --------");
         Activity[] activities = {
                 Theater.builder().name("0-Theater").description("Watch theater in Madrid").duration(180).price(10.5).build(),
                 Activity.builder().name("1-Musical").description("Watch musical in Madrid").duration(180).price(15.5).capacity(20).build(),
@@ -44,6 +45,8 @@ public class SpmSeederServiceDev {
         for (Activity activity : activities) {
             this.activityRepository.create(activity);
         }
+
+        LogManager.getLogger(this.getClass()).warn("        ------- activities");
 
         Random random = new Random();
 
@@ -96,7 +99,7 @@ public class SpmSeederServiceDev {
             plan.setOwner(this.userRepository.read(1L).get());
             this.planRepository.create(plan);
         }
-        LogManager.getLogger(this.getClass()).warn("------- Spm Initial Load --------");
+        LogManager.getLogger(this.getClass()).warn("        ------- plans");
     }
 
     public void deleteAll() {
