@@ -1,5 +1,7 @@
 package org.stafloker.console.commands.userCommands;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.stafloker.console.Session;
 import org.stafloker.console.Command;
 import org.stafloker.console.View;
@@ -7,6 +9,7 @@ import org.stafloker.console.exceptions.UnsupportedAttributesException;
 import org.stafloker.data.models.User;
 import org.stafloker.services.UserService;
 
+@Controller
 public class Login implements Command {
     private static final String VALUE = "login";
     private static final String PARAMETER_HELP = "<username>;<password>";
@@ -16,6 +19,7 @@ public class Login implements Command {
     private final View view;
     private final Session session;
 
+    @Autowired
     public Login(UserService userService, View view, Session session) {
         this.userService = userService;
         this.view = view;

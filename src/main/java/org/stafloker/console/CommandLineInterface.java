@@ -1,11 +1,11 @@
 package org.stafloker.console;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import java.util.*;
 
-@Component
+@Controller
 public class CommandLineInterface {
     public static final String DELIMITER_COLON_OR_RETURN = "[:,\\r\\n]";
 

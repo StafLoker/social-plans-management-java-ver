@@ -1,5 +1,8 @@
 package org.stafloker.console.commands.planCommands.list;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.stafloker.console.Session;
 import org.stafloker.console.Command;
 import org.stafloker.console.View;
@@ -7,6 +10,7 @@ import org.stafloker.data.models.User;
 import org.stafloker.console.commands.planCommands.PlanCommand;
 import org.stafloker.services.PlanService;
 
+@Controller
 public class SubscribedPlansList extends PlanCommand implements Command {
     private static final String VALUE = "subscribed-plans";
     private static final String PARAMETER_HELP = "";
@@ -16,6 +20,7 @@ public class SubscribedPlansList extends PlanCommand implements Command {
     private final PlanService planService;
     private final View view;
 
+    @Autowired
     public SubscribedPlansList(PlanService planService, View view, Session session) {
         super();
         this.planService = planService;
