@@ -19,7 +19,7 @@ public class Activity {
 
     @Id
     @EqualsAndHashCode.Include
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
     @Column(nullable = false)
@@ -37,11 +37,17 @@ public class Activity {
         return this.price;
     }
 
-    public void setCapacity(Integer capacity) {
-        if (capacity < MIN_CAPACITY) {
-            throw new InvalidAttributeException("Minimum capacity is " + MIN_CAPACITY + ": " + capacity);
+    public static class ActivityBuilder {
+        public ActivityBuilder capacity(Integer capacity){
+            this.setCapacity(capacity);
+            return this;
         }
-        this.capacity = capacity;
 
+        private void setCapacity(Integer capacity) {
+            if (capacity < MIN_CAPACITY) {
+                throw new InvalidAttributeException("Minimum capacity is " + MIN_CAPACITY + ": " + capacity);
+            }
+            this.capacity = capacity;
+        }
     }
 }

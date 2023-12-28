@@ -32,7 +32,7 @@ public class AddActivityToPlan implements Command {
         if (values.length != 2) {
             throw new UnsupportedAttributesException(this.helpParameters());
         }
-        this.view.showPlan(this.planService.addActivity(Integer.parseInt(values[0]), Integer.parseInt(values[1]), user));
+        this.view.showPlan(this.planService.addActivity(Long.parseLong(values[0]), Long.parseLong(values[1]), user));
     }
 
     @Override

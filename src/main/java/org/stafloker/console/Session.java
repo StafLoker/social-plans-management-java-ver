@@ -16,7 +16,7 @@ public class Session {
 
     public void assertLogin() {
         if (Optional.ofNullable(this.loggedUser).isEmpty()) {
-            throw new SecurityAuthorizationException("Use command/s ~ login ~ and/or ~ user-create ~");
+            throw new SecurityAuthorizationException("Use command/s ~ login ~ and/or ~ create-user ~");
         }
     }
 

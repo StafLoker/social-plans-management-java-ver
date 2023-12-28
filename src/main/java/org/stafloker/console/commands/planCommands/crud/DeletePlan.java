@@ -32,7 +32,7 @@ public class DeletePlan implements Command {
         if (values.length != 1) {
             throw new UnsupportedAttributesException(this.helpParameters());
         }
-        this.planService.delete(Integer.parseInt(values[0]), user);
+        this.planService.delete(Long.parseLong(values[0]), user);
         this.view.showResult("Plan with id=" + values[0] + " deleted successfully");
     }
 

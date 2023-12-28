@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,7 +25,7 @@ public class Plan {
 
     @Id
     @EqualsAndHashCode.Include
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
     @ManyToOne(optional = false)
@@ -44,14 +45,16 @@ public class Plan {
             joinColumns = @JoinColumn(name = "plan_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private List<User> subscribersList;
+    @Builder.Default
+    private List<User> subscribersList = new LinkedList<>();
     @ManyToMany
     @JoinTable(
             name = "plan_activities",
             joinColumns = @JoinColumn(name = "plan_id"),
             inverseJoinColumns = @JoinColumn(name = "activity_id")
     )
-    private List<Activity> activitiesList;
+    @Builder.Default
+    private List<Activity> activitiesList = new LinkedList<>();
 
     public void addSubscriber(User user) {
         if (!Objects.isNull(this.capacity)) {
@@ -89,10 +92,17 @@ public class Plan {
         return this.activitiesList.stream().mapToInt(activity -> activity.getDuration() + TIME_DISPLACEMENT).sum();
     }
 
-    public void setCapacity(Integer capacity) {
-        if (capacity < MIN_CAPACITY) {
-            throw new InvalidAttributeException("Minimum capacity is " + MIN_CAPACITY + ": " + capacity);
+    public static class PlanBuilder {
+        public PlanBuilder capacity(Integer capacity){
+            this.setCapacity(capacity);
+            return this;
         }
-        this.capacity = capacity;
+
+        private void setCapacity(Integer capacity) {
+            if (capacity < MIN_CAPACITY) {
+                throw new InvalidAttributeException("Minimum capacity is " + MIN_CAPACITY + ": " + capacity);
+            }
+            this.capacity = capacity;
+        }
     }
 }

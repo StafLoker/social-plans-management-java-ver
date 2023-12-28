@@ -32,7 +32,7 @@ public class GetPlanPrice implements Command {
         if (values.length != 1) {
             throw new UnsupportedAttributesException(this.helpParameters());
         }
-        this.view.showResult(this.planService.cost(Integer.parseInt(values[0]), user) + " €");
+        this.view.showResult(this.planService.cost(Long.parseLong(values[0]), user) + " €");
     }
 
     @Override
