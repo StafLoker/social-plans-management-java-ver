@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.stafloker</groupId>
-    <artifactId>management-of-social-plans</artifactId>
+    <artifactId>social-plans-management</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>management-of-social-plans</name>
+    <name>social-plans-management</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

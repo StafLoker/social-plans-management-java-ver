@@ -1,1 +1,4 @@
-# Management of Social Plans (MSP)
+# Social Plans Management (SPM)
+
+### Technologies used
+`Maven` `Spring-boot` `Hibernate`
