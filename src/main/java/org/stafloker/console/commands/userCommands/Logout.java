@@ -1,11 +1,11 @@
 package org.stafloker.console.commands.userCommands;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 import org.stafloker.console.Session;
 import org.stafloker.console.Command;
 
-@Controller
+@Component
 public class Logout implements Command {
     private static final String VALUE = "logout";
     private static final String PARAMETER_HELP = "";

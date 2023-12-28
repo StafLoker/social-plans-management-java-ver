@@ -1,7 +1,7 @@
 package org.stafloker.console.commands.planCommands.crud;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 import org.stafloker.console.Session;
 import org.stafloker.console.Command;
 import org.stafloker.console.View;
@@ -13,9 +13,9 @@ import org.stafloker.services.PlanService;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@Controller
+@Component
 public class CreatePlan implements Command {
-    private static final String VALUE = "plan-create";
+    private static final String VALUE = "create-plan";
     private static final String PARAMETER_HELP = "<name>;<date: dd-MM-yyyy HH.mm>;<meetingPlace>;<<capacity>>";
     private static final String COMMENT_HELP = "Create a new plan";
 
