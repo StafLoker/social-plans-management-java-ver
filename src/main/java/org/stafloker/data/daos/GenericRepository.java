@@ -1,4 +1,4 @@
-package org.stafloker.data.repositories;
+package org.stafloker.data.daos;
 
 import java.util.List;
 import java.util.Optional;

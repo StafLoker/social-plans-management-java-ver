@@ -1,9 +1,9 @@
-package org.stafloker.data.repositories.repositories_sql;
+package org.stafloker.data.daos.repositories_sql;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.stafloker.data.repositories.GenericRepository;
+import org.stafloker.data.daos.GenericRepository;
 
 import java.io.Serializable;
 import java.util.List;

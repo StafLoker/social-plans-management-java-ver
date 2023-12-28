@@ -1,4 +1,4 @@
-package org.stafloker.data.repositories.repositories_sql;
+package org.stafloker.data.daos.repositories_sql;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;

@@ -1,4 +1,4 @@
-package org.stafloker.data.repositories.seeder;
+package org.stafloker.data.daos.seeder;
 
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +8,9 @@ import org.stafloker.data.models.spm.Activity;
 import org.stafloker.data.models.spm.Plan;
 import org.stafloker.data.models.spm.activityType.Cinema;
 import org.stafloker.data.models.spm.activityType.Theater;
-import org.stafloker.data.repositories.ActivityRepository;
-import org.stafloker.data.repositories.PlanRepository;
-import org.stafloker.data.repositories.UserRepository;
+import org.stafloker.data.daos.ActivityRepository;
+import org.stafloker.data.daos.PlanRepository;
+import org.stafloker.data.daos.UserRepository;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
