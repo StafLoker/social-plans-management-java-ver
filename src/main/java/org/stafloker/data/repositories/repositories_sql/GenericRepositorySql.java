@@ -21,11 +21,11 @@ public abstract class GenericRepositorySql<T> implements GenericRepository<T> {
     public T create(T entity) {
         try (Session session = this.sessionFactory.openSession()) {
             session.beginTransaction();
-            Serializable id = (Serializable) session.save(entity);
+            Serializable id = session.save(entity);
             session.getTransaction().commit();
 
             @SuppressWarnings("unchecked")
-            T createdEntity = (T) session.get(entity.getClass(), id);
+            T createdEntity = (T) session.find(entity.getClass(), id);
             return createdEntity;
         } catch (HibernateException e) {
             throw new UnsupportedOperationException("Hibernate: " + e);
@@ -45,9 +45,9 @@ public abstract class GenericRepositorySql<T> implements GenericRepository<T> {
     }
 
     @Override
-    public Optional<T> read(Integer id) {
+    public Optional<T> read(Long id) {
         try (Session session = this.sessionFactory.openSession()) {
-            T entity = session.get(this.getEntityClass(), id);
+            T entity = session.find(this.getEntityClass(), id);
             return Optional.ofNullable(entity);
         } catch (HibernateException e) {
             throw new UnsupportedOperationException("Hibernate: " + e);
@@ -55,13 +55,11 @@ public abstract class GenericRepositorySql<T> implements GenericRepository<T> {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         try (Session session = this.sessionFactory.openSession()) {
             session.beginTransaction();
-            T entity = session.get(this.getEntityClass(), id);
-            if (entity != null) {
-                session.delete(entity);
-            }
+            Optional<T> entity = this.read(id);
+            entity.ifPresent(session::delete);
             session.getTransaction().commit();
         } catch (HibernateException e) {
             throw new UnsupportedOperationException("Hibernate: " + e);
@@ -73,6 +71,16 @@ public abstract class GenericRepositorySql<T> implements GenericRepository<T> {
         try (Session session = this.sessionFactory.openSession()) {
             return session.createQuery("FROM " + this.getEntityClass().getSimpleName(), this.getEntityClass()).list();
         } catch (HibernateException e) {
+            throw new UnsupportedOperationException("Hibernate: " + e);
+        }
+    }
+
+    public void deleteAll() {
+        try (Session session = this.sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.createQuery("DELETE FROM " + this.getEntityClass().getSimpleName()).executeUpdate();
+            session.getTransaction().commit();
+        } catch (Exception e) {
             throw new UnsupportedOperationException("Hibernate: " + e);
         }
     }

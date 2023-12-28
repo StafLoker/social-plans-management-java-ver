@@ -8,10 +8,11 @@ public interface GenericRepository<T> {
 
     T update(T entity);
 
-    Optional<T> read(Integer id);
+    Optional<T> read(Long id);
 
-    void deleteById(Integer id);
+    void deleteById(Long id);
 
     List<T> findAll();
 
+    void deleteAll();
 }

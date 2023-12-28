@@ -32,7 +32,7 @@ public class GetPlanDuration implements Command {
         if (values.length != 1) {
             throw new UnsupportedAttributesException(this.helpParameters());
         }
-        int duration = this.planService.duration(Integer.parseInt(values[0]), user);
+        int duration = this.planService.duration(Long.parseLong(values[0]), user);
         this.view.showResult(duration / 60 + " hour/s " + duration % 60 + " minute/s");
     }
 

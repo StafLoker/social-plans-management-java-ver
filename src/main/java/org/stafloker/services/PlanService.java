@@ -35,7 +35,7 @@ public class PlanService {
         return this.planRepository.create(plan);
     }
 
-    public void delete(Integer planId, User user) {
+    public void delete(Long planId, User user) {
         Optional<Plan> plan = this.planRepository.read(planId);
         if (plan.isPresent()) {
             if (!plan.get().getOwner().equals(user)) {
@@ -45,7 +45,7 @@ public class PlanService {
         }
     }
 
-    public Plan addActivity(Integer planId, Integer activityId, User user) {
+    public Plan addActivity(Long planId, Long activityId, User user) {
         Optional<Plan> plan = this.planRepository.read(planId);
         if (plan.isEmpty()) {
             throw new NotFoundException("The plan with ID: " + planId + " does not exist");
@@ -62,7 +62,7 @@ public class PlanService {
         return this.planRepository.update(plan.get());
     }
 
-    public Plan enrollSubscriber(Integer planId, User user) {
+    public Plan enrollSubscriber(Long planId, User user) {
         Optional<Plan> plan = this.planRepository.read(planId);
         if (plan.isEmpty()) {
             throw new NotFoundException("The plan with ID: " + planId + " does not exist");
@@ -79,7 +79,7 @@ public class PlanService {
         return this.planRepository.update(plan.get());
     }
 
-    public double cost(Integer planId, User user) {
+    public double cost(Long planId, User user) {
         Optional<Plan> plan = this.planRepository.read(planId);
         if (plan.isEmpty()) {
             throw new NotFoundException("Plan with ID: " + planId + " does not exist");
@@ -90,7 +90,7 @@ public class PlanService {
         return plan.get().getPrice(user);
     }
 
-    public int duration(Integer planId, User user) {
+    public int duration(Long planId, User user) {
         Optional<Plan> plan = this.planRepository.read(planId);
         if (plan.isEmpty()) {
             throw new InvalidAttributeException("Plan with ID: " + planId + " does not exist");

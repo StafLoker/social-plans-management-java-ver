@@ -32,7 +32,7 @@ public class EnrollSubscriber implements Command {
         if (values.length != 1) {
             throw new UnsupportedAttributesException(this.helpParameters());
         }
-        this.view.showPlan(this.planService.enrollSubscriber(Integer.parseInt(values[0]), user));
+        this.view.showPlan(this.planService.enrollSubscriber(Long.parseLong(values[0]), user));
     }
 
     @Override
