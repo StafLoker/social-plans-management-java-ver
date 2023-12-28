@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.stafloker.services.exceptions.SecurityProhibitionException;
 
+import javax.annotation.PostConstruct;
+
 @Component
 public class ErrorHandler {
     private final CommandLineInterface commandLineInterface;
@@ -16,6 +18,7 @@ public class ErrorHandler {
         this.view.showWelcome();
     }
 
+    @PostConstruct
     public void errorManager() {
         boolean exit = false;
         while (!exit) {
