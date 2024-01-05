@@ -29,7 +29,7 @@ public class Plan {
     @Column
     private Long id;
     @ManyToOne(optional = false)
-    @JoinColumn
+    @JoinColumn(name = "owner_id")
     private User owner;
     @Column(nullable = false)
     private String name;

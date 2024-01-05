@@ -14,7 +14,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>social-plans-management</name>
+    <name>${project.artifactId}</name>
     <description>Project architecture is SPA</description>
 
     <properties>
@@ -44,21 +44,21 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <!-- =============== Databases =============== -->
-        <!-- Spring -->
+        <!-- Database JPA | Spring -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <!-- H2 Database embedded test & dev -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <!-- PostgreSQL Driver -->
+        <!-- Database external: PRODUCTION | PostgreSQL Driver -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- Database embedded test & dev | H2 Database -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
         <!-- =============== Logs =============== -->
