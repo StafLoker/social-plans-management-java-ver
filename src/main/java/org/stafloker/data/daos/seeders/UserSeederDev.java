@@ -11,7 +11,7 @@ import org.stafloker.data.daos.UserRepository;
 import java.util.Arrays;
 
 @Repository
-@Profile({"dev", "test"})
+@Profile("dev")
 public class UserSeederDev {
 
     private final DatabaseStarting databaseStarting;
