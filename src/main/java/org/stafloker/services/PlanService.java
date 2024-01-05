@@ -79,7 +79,7 @@ public class PlanService {
         return this.planRepository.update(plan.get());
     }
 
-    public double cost(Long planId, User user) {
+    public double price(Long planId, User user) {
         Optional<Plan> plan = this.planRepository.read(planId);
         if (plan.isEmpty()) {
             throw new NotFoundException("Plan with ID: " + planId + " does not exist");
@@ -113,7 +113,7 @@ public class PlanService {
                 .toList();
     }
 
-    public List<Plan> costRangePlans(Double price, Double range, User user) {
+    public List<Plan> priceRangePlans(Double price, Double range, User user) {
         if (price < range) {
             throw new InvalidAttributeException("The price " + price + " cannot be less than the range " + range);
         }

@@ -34,7 +34,7 @@ public class CostRangePlansList extends PlanCommand implements Command {
         if (values.length != 2) {
             throw new UnsupportedAttributesException(this.helpParameters());
         }
-        this.sortByDate(this.planService.costRangePlans(Double.parseDouble(values[0]), Double.parseDouble(values[1]), this.session.getSecuredUser()))
+        this.sortByDate(this.planService.priceRangePlans(Double.parseDouble(values[0]), Double.parseDouble(values[1]), this.session.getSecuredUser()))
                 .forEach(this.view::showPlans);
     }
 
