@@ -1,6 +1,7 @@
 package org.stafloker.data.daos.jpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.stafloker.data.daos.PlanRepository;
 import org.stafloker.data.daos.jpa.persistences.PlanPersistenceJpa;
 import org.stafloker.data.models.spm.Plan;
@@ -8,6 +9,7 @@ import org.stafloker.data.models.spm.Plan;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class PlanRepositoryJpa implements PlanRepository {
 
     private final PlanPersistenceJpa planPersistenceJpa;
