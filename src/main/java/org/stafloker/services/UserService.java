@@ -17,11 +17,11 @@ public class UserService {
     }
 
     public User create(User user) {
-        this.userRepository.searchByName(user.getName())
+        this.userRepository.findByName(user.getName())
                 .ifPresent(existingUser -> {
                     throw new DuplicateException("The username already exists and must be unique: " + user.getName());
                 });
-        this.userRepository.searchByMobile(user.getMobile())
+        this.userRepository.findByMobile(user.getMobile())
                 .ifPresent(existingUser -> {
                     throw new DuplicateException("The mobile number already exists and must be unique: " + user.getMobile());
                 });
@@ -29,7 +29,7 @@ public class UserService {
     }
 
     public User login(String username, String password) {
-        return this.userRepository.searchByName(username)
+        return this.userRepository.findByName(username)
                 .filter(user -> user.getPassword().equals(password))
                 .orElseThrow(() -> new SecurityAuthorizationException("Unauthorized credentials"));
     }
