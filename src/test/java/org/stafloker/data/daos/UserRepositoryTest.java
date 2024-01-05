@@ -1,16 +1,16 @@
 package org.stafloker.data.daos;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.stafloker.TestConfig;
 
-@SpringBootTest
+@TestConfig
 class UserRepositoryTest {
 
     @Test
-    void searchByName() {
+    void findByName() {
     }
 
     @Test
-    void searchByMobile() {
+    void findByMobile() {
     }
 }

@@ -1,9 +1,9 @@
 package org.stafloker.data.models.spm;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.stafloker.TestConfig;
 
-@SpringBootTest
+@TestConfig
 class ActivityTest {
 
     @Test

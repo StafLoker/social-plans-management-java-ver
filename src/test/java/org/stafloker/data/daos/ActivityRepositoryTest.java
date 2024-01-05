@@ -1,8 +1,8 @@
 package org.stafloker.data.daos;
 
-import org.springframework.boot.test.context.SpringBootTest;
+import org.stafloker.TestConfig;
 
-@SpringBootTest
+@TestConfig
 class ActivityRepositoryTest {
 
 }
