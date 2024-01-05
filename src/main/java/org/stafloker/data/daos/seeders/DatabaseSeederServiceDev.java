@@ -1,9 +1,11 @@
-package org.stafloker.data.repositories.seeder;
+package org.stafloker.data.daos.seeders;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-@Repository //@Profile("dev")
+@Repository
+@Profile({"dev", "test"})
 public class DatabaseSeederServiceDev {
     private final UserSeederDev userSeederDev;
     private final SpmSeederServiceDev spmSeederServiceDev;
@@ -15,6 +17,11 @@ public class DatabaseSeederServiceDev {
         this.reSeedDatabase();
     }
 
+    public void reSeedDatabase() {
+        this.deleteAll();
+        this.seedDatabase();
+    }
+
     public void seedDatabase() {
         this.userSeederDev.seedDataBase();
         this.spmSeederServiceDev.seedDatabase();
@@ -23,10 +30,5 @@ public class DatabaseSeederServiceDev {
     public void deleteAll() {
         this.userSeederDev.deleteAllAndInitialize();
         this.spmSeederServiceDev.deleteAll();
-    }
-
-    public void reSeedDatabase() {
-        this.deleteAll();
-        this.seedDatabase();
     }
 }

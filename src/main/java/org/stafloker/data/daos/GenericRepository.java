@@ -1,4 +1,4 @@
-package org.stafloker.data.repositories;
+package org.stafloker.data.daos;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +12,9 @@ public interface GenericRepository<T> {
 
     void deleteById(Long id);
 
-    List<T> findAll();
+    List<T> saveAll(List<T> entitiesList);
 
     void deleteAll();
+
+    List<T> findAll();
 }

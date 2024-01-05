@@ -1,14 +1,14 @@
 package org.stafloker.console.commands.userCommands;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.stafloker.console.Command;
 import org.stafloker.console.View;
 import org.stafloker.console.exceptions.UnsupportedAttributesException;
 import org.stafloker.data.models.User;
 import org.stafloker.services.UserService;
 
-@Component
+@Controller
 public class CreateUser implements Command {
     private static final String VALUE = "create-user";
     private static final String PARAMETER_HELP = "<name>;<password>;<age>;<mobile>";

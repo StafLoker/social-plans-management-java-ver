@@ -3,7 +3,7 @@ package org.stafloker.data.models.spm;
 import lombok.*;
 import org.stafloker.data.models.exceptions.InvalidAttributeException;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Data
 @NoArgsConstructor

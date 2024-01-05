@@ -1,10 +1,8 @@
 package org.stafloker.data.models;
 
+import jakarta.persistence.*;
 import lombok.*;
 import org.stafloker.data.models.exceptions.InvalidAttributeException;
-
-import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 
 @Data
 @NoArgsConstructor

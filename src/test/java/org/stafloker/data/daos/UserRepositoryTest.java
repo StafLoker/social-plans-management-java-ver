@@ -1,16 +1,16 @@
-package org.stafloker.data.models.spm;
+package org.stafloker.data.daos;
 
 import org.junit.jupiter.api.Test;
 import org.stafloker.TestConfig;
 
 @TestConfig
-class ActivityTest {
+class UserRepositoryTest {
 
     @Test
-    void getPrice() {
+    void findByName() {
     }
 
     @Test
-    void setCapacity() {
+    void findByMobile() {
     }
 }

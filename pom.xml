@@ -2,18 +2,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.stafloker</groupId>
-    <artifactId>social-plans-management</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
-
-    <name>social-plans-management</name>
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.14</version>
+        <version>3.2.1</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
+    <groupId>org.stafloker</groupId>
+    <artifactId>social-plans-management</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>social-plans-management</name>
+    <description>Project architecture is SPA</description>
 
     <properties>
         <!-- Encode -->
@@ -24,45 +26,46 @@
         <!-- Maven -->
         <maven.compiler.version>3.10.1</maven.compiler.version>
         <maven.compile.source>19</maven.compile.source>
+        <!-- Java -->
+        <java.version>21</java.version>
         <!-- Lombok -->
         <lombok.version>1.18.22</lombok.version>
-        <!-- Database -->
-        <mysql.version>8.0.33</mysql.version>
-        <org.hibernate.version>5.4.9.Final</org.hibernate.version>
         <!-- Logs -->
         <log4j.version>2.20.0</log4j.version>
-        <!-- JUnit -->
-        <junit.jupiter.version>5.9.3</junit.jupiter.version>
     </properties>
 
     <dependencies>
-        <!-- =============== Spring =============== -->
-        <!-- Security -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
         <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
-        <!-- =============== Databases =============== -->
-            <!-- MySQL Connector -->
+        <!-- =============== Security =============== -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-            <!-- Hibernate -->
+        <!-- =============== Databases =============== -->
+        <!-- Spring -->
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>${org.hibernate.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <!-- H2 Database embedded test & dev -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- PostgreSQL Driver -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
         </dependency>
         <!-- =============== Logs =============== -->
-            <!-- Log4j -->
+        <!-- Log4j -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
@@ -79,17 +82,15 @@
             <version>${log4j.version}</version>
         </dependency>
         <!-- =============== Tests =============== -->
-            <!-- JUnit5 -->
+        <!-- Spring -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.jupiter.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.jupiter.version}</version>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -104,6 +105,18 @@
                     <source>${maven.compile.source}</source>
                     <target>${maven.compile.source}</target>
                     <release>${maven.compile.source}</release>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
                 </configuration>
             </plugin>
         </plugins>
