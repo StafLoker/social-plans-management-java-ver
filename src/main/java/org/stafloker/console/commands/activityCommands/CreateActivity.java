@@ -1,7 +1,7 @@
 package org.stafloker.console.commands.activityCommands;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.stafloker.console.Session;
 import org.stafloker.console.Command;
 import org.stafloker.console.View;
@@ -10,7 +10,7 @@ import org.stafloker.data.models.spm.Activity;
 import org.stafloker.data.models.spm.activityType.*;
 import org.stafloker.services.ActivityService;
 
-@Component
+@Controller
 public class CreateActivity implements Command {
     private static final String VALUE = "create-activity";
     private static final String PARAMETER_HELP = "<name>;<description>;<duration: minutes>;<cost>;<type: Generic, Theatre, Cinema>;<<capacity>>";

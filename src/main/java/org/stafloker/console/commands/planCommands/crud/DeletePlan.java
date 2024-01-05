@@ -1,15 +1,15 @@
 package org.stafloker.console.commands.planCommands.crud;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.stafloker.console.exceptions.UnsupportedAttributesException;
 import org.stafloker.console.Session;
 import org.stafloker.console.Command;
 import org.stafloker.console.View;
-import org.stafloker.console.exceptions.UnsupportedAttributesException;
 import org.stafloker.data.models.User;
 import org.stafloker.services.PlanService;
 
-@Component
+@Controller
 public class DeletePlan implements Command {
     private static final String VALUE = "delete-plan";
     private static final String PARAMETER_HELP = "<plan_id>";

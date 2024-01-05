@@ -1,4 +1,4 @@
-package org.stafloker.data.repositories.seeder;
+package org.stafloker.data.daos.seeders;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;

@@ -1,6 +1,6 @@
 package org.stafloker.console;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.stafloker.data.models.User;
 import org.stafloker.data.models.spm.Activity;
 import org.stafloker.data.models.spm.Plan;
@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
-@Component
+@Controller
 public class View {
     public static final String COMMAND = "spm";
 

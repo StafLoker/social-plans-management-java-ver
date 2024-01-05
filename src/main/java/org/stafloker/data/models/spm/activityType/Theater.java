@@ -2,7 +2,7 @@ package org.stafloker.data.models.spm.activityType;
 
 import org.stafloker.data.models.spm.Activity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @DiscriminatorValue("Theater")
