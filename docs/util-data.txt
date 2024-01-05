@@ -18,7 +18,7 @@ plan-join: 7
 
 <<---------------------------------------------->>
 
-SPL
+SPM
 
 Seeder - for App development only.
 Population content:
