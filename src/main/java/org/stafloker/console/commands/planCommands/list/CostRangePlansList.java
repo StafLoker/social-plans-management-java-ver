@@ -1,16 +1,16 @@
 package org.stafloker.console.commands.planCommands.list;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.stafloker.console.exceptions.UnsupportedAttributesException;
 import org.stafloker.console.Session;
 import org.stafloker.console.Command;
 import org.stafloker.console.View;
-import org.stafloker.console.exceptions.UnsupportedAttributesException;
 
 import org.stafloker.console.commands.planCommands.PlanCommand;
 import org.stafloker.services.PlanService;
 
-@Component
+@Controller
 public class CostRangePlansList extends PlanCommand implements Command {
     private static final String VALUE = "price-range-plans";
     private static final String PARAMETER_HELP = "<price>;<range>";
