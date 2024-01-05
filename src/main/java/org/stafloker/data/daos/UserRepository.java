@@ -1,11 +1,14 @@
 package org.stafloker.data.daos;
 
+import org.springframework.stereotype.Repository;
 import org.stafloker.data.models.User;
 
 import java.util.Optional;
 
-public interface UserRepository extends GenericRepository<User> {
-    Optional<User> searchByName(String name);
+@Repository
+public interface UserRepository extends GenericRepository<User>{
 
-    Optional<User> searchByMobile(String mobileNumber);
+    Optional<User> findByName(String name);
+
+    Optional<User> findByMobile(String mobileNumber);
 }
