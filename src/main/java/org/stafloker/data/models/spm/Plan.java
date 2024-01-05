@@ -92,6 +92,13 @@ public class Plan {
         return this.activitiesList.stream().mapToInt(activity -> activity.getDuration() + TIME_DISPLACEMENT).sum();
     }
 
+    public void setCapacity(Integer capacity) {
+        if (capacity < MIN_CAPACITY) {
+            throw new InvalidAttributeException("Minimum capacity is " + MIN_CAPACITY + ": " + capacity);
+        }
+        this.capacity = capacity;
+    }
+
     public static class PlanBuilder {
         public PlanBuilder capacity(Integer capacity){
             this.setCapacity(capacity);

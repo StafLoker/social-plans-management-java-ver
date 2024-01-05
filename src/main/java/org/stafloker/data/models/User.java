@@ -30,6 +30,20 @@ public class User {
     @Column(nullable = false)
     private Integer age;
 
+    public void setPassword(String password) {
+        if (password.length() < MIN_LONG_PASSWORD) {
+            throw new InvalidAttributeException("Password has less than three characters: " + password);
+        }
+        this.password = password;
+    }
+
+    public void setAge(Integer age) {
+        if (age < MIN_AGE || age > MAX_AGE) {
+            throw new InvalidAttributeException("Age is not in your range [" + MIN_AGE + "," + MAX_AGE + "]: " + age);
+        }
+        this.age = age;
+    }
+
     public static class UserBuilder {
         public UserBuilder password(String password) {
             this.setPassword(password);

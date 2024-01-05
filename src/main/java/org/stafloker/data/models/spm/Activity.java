@@ -37,6 +37,13 @@ public class Activity {
         return this.price;
     }
 
+    public void setCapacity(Integer capacity) {
+        if (capacity < MIN_CAPACITY) {
+            throw new InvalidAttributeException("Minimum capacity is " + MIN_CAPACITY + ": " + capacity);
+        }
+        this.capacity = capacity;
+    }
+
     public static class ActivityBuilder {
         public ActivityBuilder capacity(Integer capacity){
             this.setCapacity(capacity);
