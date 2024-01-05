@@ -15,6 +15,7 @@ import org.stafloker.data.daos.UserRepository;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
+import java.util.Arrays;
 import java.util.Random;
 
 @Repository
@@ -42,9 +43,7 @@ public class SpmSeederServiceDev {
                 Activity.builder().name("5-Pizza").description("Go for pizza in Madrid").duration(120).price(12.0).capacity(22).build(),
                 Activity.builder().name("6-Party").description("Go clubbing in Madrid").duration(300).price(30.0).capacity(40).build(),
         };
-        for (Activity activity : activities) {
-            this.activityRepository.create(activity);
-        }
+        this.activityRepository.saveAll(Arrays.asList(activities));
 
         LogManager.getLogger(this.getClass()).warn("        ------- activities");
 
