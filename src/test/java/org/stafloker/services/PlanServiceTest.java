@@ -64,14 +64,14 @@ class PlanServiceTest {
     void testEnrollSubscriber() {
         this.session.setLoggedUser(this.userRepository.read(6L).get());
         this.planService.enrollSubscriber(3L, this.session.getSecuredUser());
-        assertTrue(this.planRepository.read(3L).get().getActivitiesList().contains(this.userRepository.read(2L).get()));
-        this.planRepository.read(3L).get().getActivitiesList().remove(this.userRepository.read(1L).get());
+        assertTrue(this.planRepository.read(3L).get().getSubscribersList().contains(this.userRepository.read(2L).get()));
+        this.planRepository.read(3L).get().getSubscribersList().remove(this.userRepository.read(1L).get());
         this.session.setLoggedUser(this.userRepository.read(1L).get());
 
         this.planService.enrollSubscriber(4L, this.session.getSecuredUser());
         assertThrows(InvalidAttributeException.class, ()-> this.planService.enrollSubscriber(5L, this.session.getSecuredUser()));
         assertThrows(DuplicateException.class, ()->this.planService.enrollSubscriber(4L, this.session.getSecuredUser()));
-        this.planRepository.read(4L).get().getActivitiesList().remove(this.userRepository.read(1L).get());
+        this.planRepository.read(4L).get().getSubscribersList().remove(this.userRepository.read(1L).get());
 
         Plan plan = this.planService.create(Plan.builder().name("Test, past plan").date((LocalDateTime.now().plusDays(-1))).meetingPlace("Callao, Madrid").build(), this.session.getSecuredUser());
         assertThrows(InvalidAttributeException.class, ()-> this.planService.enrollSubscriber(plan.getId(), this.session.getSecuredUser()));

@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@Profile("dev")
+@Profile({"dev", "test"})
 public class DatabaseSeederServiceDev {
     private final UserSeederDev userSeederDev;
     private final SpmSeederServiceDev spmSeederServiceDev;

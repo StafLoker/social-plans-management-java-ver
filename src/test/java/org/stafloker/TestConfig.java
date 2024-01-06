@@ -12,12 +12,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE) // indicates that this annotation can be applied to types (classes, interfaces, enumerations)
+@Retention(RetentionPolicy.RUNTIME) // indicates that the annotation will be available at runtime
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith(SpringExtension.class) // indicates that JUnit5 uses Spring Boot
 @SpringBootTest
 @TestPropertySource(locations = "classpath:test.properties")
-@ActiveProfiles("dev")
+@ActiveProfiles("test")
 public @interface TestConfig {
 }

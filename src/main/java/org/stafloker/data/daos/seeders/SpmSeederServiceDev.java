@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 @Repository
-@Profile("dev")
+@Profile({"dev", "test"})
 public class SpmSeederServiceDev {
     private final UserRepository userRepository;
     private final PlanRepository planRepository;
