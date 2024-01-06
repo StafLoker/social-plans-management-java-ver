@@ -1,6 +1,7 @@
 package org.stafloker.data.models.spm;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.stafloker.data.models.exceptions.InvalidAttributeException;
 
 import jakarta.persistence.*;
@@ -8,7 +9,7 @@ import jakarta.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "activities")
@@ -37,17 +38,10 @@ public class Activity {
         return this.price;
     }
 
-    public static class ActivityBuilder {
-        public ActivityBuilder capacity(Integer capacity){
-            this.setCapacity(capacity);
-            return this;
+    public void setCapacity(Integer capacity) {
+        if (capacity < MIN_CAPACITY) {
+            throw new InvalidAttributeException("Minimum capacity is " + MIN_CAPACITY + ": " + capacity);
         }
-
-        private void setCapacity(Integer capacity) {
-            if (capacity < MIN_CAPACITY) {
-                throw new InvalidAttributeException("Minimum capacity is " + MIN_CAPACITY + ": " + capacity);
-            }
-            this.capacity = capacity;
-        }
+        this.capacity = capacity;
     }
 }

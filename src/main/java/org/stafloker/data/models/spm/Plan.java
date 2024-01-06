@@ -29,7 +29,7 @@ public class Plan {
     @Column
     private Long id;
     @ManyToOne(optional = false)
-    @JoinColumn
+    @JoinColumn(name = "owner_id")
     private User owner;
     @Column(nullable = false)
     private String name;
@@ -39,7 +39,7 @@ public class Plan {
     private String meetingPlace;
     @Column
     private Integer capacity;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "plan_subscribers",
             joinColumns = @JoinColumn(name = "plan_id"),
@@ -47,7 +47,7 @@ public class Plan {
     )
     @Builder.Default
     private List<User> subscribersList = new LinkedList<>();
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "plan_activities",
             joinColumns = @JoinColumn(name = "plan_id"),
@@ -65,7 +65,7 @@ public class Plan {
         this.subscribersList.add(user);
     }
 
-    public Integer getAvailableSpots() {
+    public Integer availableSpots() {
         if (Objects.isNull(this.capacity)) {
             return null;
         }
@@ -84,25 +84,18 @@ public class Plan {
         this.activitiesList.add(activity);
     }
 
-    public Double getPrice(User user) {
+    public Double price(User user) {
         return this.activitiesList.stream().mapToDouble(activity -> activity.getPrice(user.getAge())).sum();
     }
 
-    public Integer getDuration() {
+    public Integer duration() {
         return this.activitiesList.stream().mapToInt(activity -> activity.getDuration() + TIME_DISPLACEMENT).sum();
     }
 
-    public static class PlanBuilder {
-        public PlanBuilder capacity(Integer capacity){
-            this.setCapacity(capacity);
-            return this;
+    public void setCapacity(Integer capacity) {
+        if (capacity < MIN_CAPACITY) {
+            throw new InvalidAttributeException("Minimum capacity is " + MIN_CAPACITY + ": " + capacity);
         }
-
-        private void setCapacity(Integer capacity) {
-            if (capacity < MIN_CAPACITY) {
-                throw new InvalidAttributeException("Minimum capacity is " + MIN_CAPACITY + ": " + capacity);
-            }
-            this.capacity = capacity;
-        }
+        this.capacity = capacity;
     }
 }

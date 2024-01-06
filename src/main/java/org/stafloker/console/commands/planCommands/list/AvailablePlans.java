@@ -1,6 +1,6 @@
 package org.stafloker.console.commands.planCommands.list;
 
-import org.springframework.beans.factory.annotation.Autowired;;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.stafloker.console.Session;
 import org.stafloker.console.Command;

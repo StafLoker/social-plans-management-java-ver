@@ -2,9 +2,11 @@ package org.stafloker.console;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.stafloker.services.exceptions.SecurityProhibitionException;
 
+@Profile({"dev", "prod"})
 @Controller
 public class ErrorHandler {
     private final CommandLineInterface commandLineInterface;

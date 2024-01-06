@@ -1,10 +1,8 @@
 package org.stafloker.data.daos.seeders;
 
-import jakarta.annotation.PostConstruct;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import org.stafloker.data.models.User;
@@ -24,8 +22,6 @@ public class DatabaseStarting {
         this.userRepository = userRepository;
     }
 
-    @Profile("prod")
-    @PostConstruct
     void initialize() {
         LogManager.getLogger(this.getClass()).warn("------- Finding Root -------------");
         if (this.userRepository.findByName(this.name).isEmpty()) {

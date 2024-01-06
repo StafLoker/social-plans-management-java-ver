@@ -7,7 +7,7 @@ import org.stafloker.console.Command;
 import org.stafloker.console.View;
 import org.stafloker.console.exceptions.UnsupportedAttributesException;
 import org.stafloker.data.models.spm.Activity;
-import org.stafloker.data.models.spm.activityType.*;
+import org.stafloker.data.models.spm.activityTypes.*;
 import org.stafloker.services.ActivityService;
 
 @Controller

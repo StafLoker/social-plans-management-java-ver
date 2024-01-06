@@ -97,7 +97,7 @@ public class View {
                 "       Date: " + plan.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH.mm")) + "\n" +
                 "       Meeting Place: " + plan.getMeetingPlace() + "\n" +
                 "       Capacity: " + (plan.getCapacity() == null ? "No limit" : plan.getCapacity()) + "\n" +
-                "       Available spots: " + (plan.getAvailableSpots() == null ? "No limit" : plan.getAvailableSpots()) + "\n" +
+                "       Available spots: " + (plan.availableSpots() == null ? "No limit" : plan.availableSpots()) + "\n" +
                 "       Activities: " + plan.getActivitiesList().stream().map(Activity::getName).toList() + "\n" +
                 "       Subscribers: " + plan.getSubscribersList().stream().map(User::getName).toList() +
                 RESET
@@ -112,7 +112,7 @@ public class View {
                 " | Date: " + BLUE + plan.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH.mm")) + CYAN +
                 " | Meeting Place: " + BLUE + plan.getMeetingPlace() + CYAN +
                 " | Capacity: " + (plan.getCapacity() == null ? "No limit" : plan.getCapacity()) +
-                " | Available spots: " + BLUE + (plan.getAvailableSpots() == null ? "No limit" : plan.getAvailableSpots()) + "\n" + CYAN +
+                " | Available spots: " + BLUE + (plan.availableSpots() == null ? "No limit" : plan.availableSpots()) + "\n" + CYAN +
                 "       Activities: " + plan.getActivitiesList().stream().map(Activity::getName).toList() + "\n" +
                 "       Subscribers: " + plan.getSubscribersList().stream().map(User::getName).toList() +
                 RESET

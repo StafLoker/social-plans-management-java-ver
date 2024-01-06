@@ -79,7 +79,7 @@ public class PlanService {
         return this.planRepository.update(plan.get());
     }
 
-    public double cost(Long planId, User user) {
+    public double price(Long planId, User user) {
         Optional<Plan> plan = this.planRepository.read(planId);
         if (plan.isEmpty()) {
             throw new NotFoundException("Plan with ID: " + planId + " does not exist");
@@ -87,7 +87,7 @@ public class PlanService {
         if (!plan.get().getSubscribersList().contains(user)) {
             throw new SecurityProhibitionException("You cannot check the price of a plan you are not participating in, ID introduced: " + plan.get().getId());
         }
-        return plan.get().getPrice(user);
+        return plan.get().price(user);
     }
 
     public int duration(Long planId, User user) {
@@ -98,7 +98,7 @@ public class PlanService {
         if (!plan.get().getSubscribersList().contains(user)) {
             throw new SecurityProhibitionException("You cannot check the duration of a plan you are not participating in, ID introduced: " + plan.get().getId());
         }
-        return plan.get().getDuration();
+        return plan.get().duration();
     }
 
     public List<Plan> availablePlans() {
@@ -113,20 +113,20 @@ public class PlanService {
                 .toList();
     }
 
-    public List<Plan> costRangePlans(Double price, Double range, User user) {
+    public List<Plan> priceRangePlans(Double price, Double range, User user) {
         if (price < range) {
             throw new InvalidAttributeException("The price " + price + " cannot be less than the range " + range);
         }
         return this.availablePlans().stream()
-                .filter(plan -> plan.getPrice(user) >= price - range && plan.getPrice(user) <= Math.min(price + range, Integer.MAX_VALUE))
+                .filter(plan -> plan.price(user) >= price - range && plan.price(user) <= Math.min(price + range, Integer.MAX_VALUE))
                 .toList();
     }
 
     public List<Plan> weekendPlans() {
-        LocalDateTime nextSaturday = LocalDateTime.now().with(TemporalAdjusters.next(DayOfWeek.SATURDAY)).withHour(0).withMinute(0).withSecond(0);
-        LocalDateTime nextMonday = nextSaturday.plusDays(2);
+        LocalDateTime nextEndOfFriday = LocalDateTime.now().with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).withHour(23).withMinute(59).withSecond(59);
+        LocalDateTime nextBeginningOfMonday = nextEndOfFriday.plusDays(2);
         return this.availablePlans().stream()
-                .filter(plan -> plan.getDate().isAfter(nextSaturday) && plan.getDate().isBefore(nextMonday))
+                .filter(plan -> plan.getDate().isAfter(nextEndOfFriday) && plan.getDate().isBefore(nextBeginningOfMonday))
                 .toList();
     }
 
@@ -140,7 +140,7 @@ public class PlanService {
     private void checkNoTimeCollisionBetweenSubscribedPlans(Plan plan, User user) {
         this.planRepository.findAll().stream()
                 .filter(pl -> pl.getSubscribersList().contains(user))
-                .filter(pl -> pl.getDate().isBefore(plan.getDate().plusMinutes(plan.getDuration())) && pl.getDate().plusMinutes(pl.getDuration()).isAfter(plan.getDate()))
+                .filter(pl -> pl.getDate().isBefore(plan.getDate().plusMinutes(plan.duration())) && pl.getDate().plusMinutes(pl.duration()).isAfter(plan.getDate()))
                 .findAny()
                 .ifPresent(pl -> {
                     throw new InvalidAttributeException("You cannot join the plan with ID: " + plan.getId() + " because it overlaps with plan ID: " + pl.getId());
