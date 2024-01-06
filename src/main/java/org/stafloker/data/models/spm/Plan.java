@@ -39,7 +39,7 @@ public class Plan {
     private String meetingPlace;
     @Column
     private Integer capacity;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "plan_subscribers",
             joinColumns = @JoinColumn(name = "plan_id"),
@@ -47,7 +47,7 @@ public class Plan {
     )
     @Builder.Default
     private List<User> subscribersList = new LinkedList<>();
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "plan_activities",
             joinColumns = @JoinColumn(name = "plan_id"),
