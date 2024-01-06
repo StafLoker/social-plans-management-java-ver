@@ -98,18 +98,4 @@ public class Plan {
         }
         this.capacity = capacity;
     }
-
-    public static class PlanBuilder {
-        public PlanBuilder capacity(Integer capacity){
-            this.setCapacity(capacity);
-            return this;
-        }
-
-        private void setCapacity(Integer capacity) {
-            if (capacity < MIN_CAPACITY) {
-                throw new InvalidAttributeException("Minimum capacity is " + MIN_CAPACITY + ": " + capacity);
-            }
-            this.capacity = capacity;
-        }
-    }
 }
