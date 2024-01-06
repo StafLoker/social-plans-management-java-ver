@@ -123,10 +123,10 @@ public class PlanService {
     }
 
     public List<Plan> weekendPlans() {
-        LocalDateTime nextSaturday = LocalDateTime.now().with(TemporalAdjusters.next(DayOfWeek.SATURDAY)).withHour(0).withMinute(0).withSecond(0);
-        LocalDateTime nextMonday = nextSaturday.plusDays(2);
+        LocalDateTime nextEndOfFriday = LocalDateTime.now().with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).withHour(23).withMinute(59).withSecond(59);
+        LocalDateTime nextBeginningOfMonday = nextEndOfFriday.plusDays(2);
         return this.availablePlans().stream()
-                .filter(plan -> plan.getDate().isAfter(nextSaturday) && plan.getDate().isBefore(nextMonday))
+                .filter(plan -> plan.getDate().isAfter(nextEndOfFriday) && plan.getDate().isBefore(nextBeginningOfMonday))
                 .toList();
     }
 

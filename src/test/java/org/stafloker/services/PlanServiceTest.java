@@ -58,6 +58,9 @@ class PlanServiceTest {
     void testAddActivity() {
         this.planService.addActivity(2L, 3L, this.session.getSecuredUser());
         assertEquals(600, this.planRepository.read(2L).get().duration());
+        Plan plan = this.planRepository.read(2L).get();
+        plan.getActivitiesList().removeIf(activity -> activity.getId().equals(3L));
+        this.planRepository.update(plan);
     }
 
     @Test
@@ -71,7 +74,9 @@ class PlanServiceTest {
         this.planService.enrollSubscriber(4L, this.session.getSecuredUser());
         assertThrows(InvalidAttributeException.class, ()-> this.planService.enrollSubscriber(5L, this.session.getSecuredUser()));
         assertThrows(DuplicateException.class, ()->this.planService.enrollSubscriber(4L, this.session.getSecuredUser()));
-        this.planRepository.read(4L).get().getSubscribersList().remove(this.userRepository.read(1L).get());
+        Plan tempPlan = this.planRepository.read(4L).get();
+        tempPlan.getSubscribersList().remove(this.session.getSecuredUser());
+        this.planRepository.update(tempPlan);
 
         Plan plan = this.planService.create(Plan.builder().name("Test, past plan").date((LocalDateTime.now().plusDays(-1))).meetingPlace("Callao, Madrid").build(), this.session.getSecuredUser());
         assertThrows(InvalidAttributeException.class, ()-> this.planService.enrollSubscriber(plan.getId(), this.session.getSecuredUser()));
@@ -106,7 +111,7 @@ class PlanServiceTest {
         subscribedPlansList.add(this.planRepository.read(2L).get());
         subscribedPlansList.add(this.planRepository.read(3L).get());
         assertEquals(subscribedPlansList, this.planService.subscribedPlans(this.session.getSecuredUser()));
-        assertFalse(subscribedPlansList.contains(this.planRepository.read(4L).get()));
+        assertFalse(this.planService.subscribedPlans(this.session.getSecuredUser()).contains(this.planRepository.read(4L).get()));
     }
 
     @Test
@@ -116,7 +121,7 @@ class PlanServiceTest {
 
     @Test
     void testWeekendPlans() {
-        Plan plan = this.planService.create(Plan.builder().name("Test, weekend plan").date(LocalDateTime.now().with(TemporalAdjusters.next(DayOfWeek.SATURDAY)).withHour(0).withMinute(0).withSecond(0)).meetingPlace("Sol, Madrid").capacity(10).build(), this.session.getSecuredUser());
+        Plan plan = this.planService.create(Plan.builder().name("Test, weekend plan").date(LocalDateTime.now().with(TemporalAdjusters.next(DayOfWeek.SATURDAY)).withHour(7).withMinute(0).withSecond(0)).meetingPlace("Sol, Madrid").capacity(10).build(), this.session.getSecuredUser());
         assertTrue(this.planService.weekendPlans().contains(plan));
         this.planRepository.deleteById(plan.getId());
     }
@@ -127,6 +132,6 @@ class PlanServiceTest {
         list.add(this.planRepository.read(1L).get());
         list.add(this.planRepository.read(3L).get());
         list.add(this.planRepository.read(4L).get());
-        assertEquals(list, this.planService.plansContainingKeyword("Cinema"));
+        assertEquals(list, this.planService.plansContainingKeyword("movie"));
     }
 }

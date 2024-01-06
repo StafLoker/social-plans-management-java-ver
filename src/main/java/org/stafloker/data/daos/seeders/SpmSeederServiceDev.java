@@ -102,8 +102,8 @@ public class SpmSeederServiceDev {
     }
 
     public void deleteAll() {
-        LogManager.getLogger(this.getClass()).warn("------- Spm Delete All ----------");
         this.activityRepository.deleteAll();
         this.planRepository.deleteAll();
+        LogManager.getLogger(this.getClass()).warn("------- Spm Delete All ----------");
     }
 }
