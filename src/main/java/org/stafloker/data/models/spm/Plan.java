@@ -65,7 +65,7 @@ public class Plan {
         this.subscribersList.add(user);
     }
 
-    public Integer getAvailableSpots() {
+    public Integer availableSpots() {
         if (Objects.isNull(this.capacity)) {
             return null;
         }
@@ -84,11 +84,11 @@ public class Plan {
         this.activitiesList.add(activity);
     }
 
-    public Double getPrice(User user) {
+    public Double price(User user) {
         return this.activitiesList.stream().mapToDouble(activity -> activity.getPrice(user.getAge())).sum();
     }
 
-    public Integer getDuration() {
+    public Integer duration() {
         return this.activitiesList.stream().mapToInt(activity -> activity.getDuration() + TIME_DISPLACEMENT).sum();
     }
 

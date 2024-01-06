@@ -57,19 +57,19 @@ class PlanTest {
     }
 
     @Test
-    void testGetAvailableSpots() {
-        assertEquals(15, this.planRepository.read(2L).get().getAvailableSpots());
+    void testAvailableSpots() {
+        assertEquals(15, this.planRepository.read(2L).get().availableSpots());
     }
 
     @Test
-    void testGetPrice() {
-        assertEquals(47.75, this.planRepository.read(1L).get().getPrice(this.userRepository.read(1L).get()));
+    void testPrice() {
+        assertEquals(47.75, this.planRepository.read(1L).get().price(this.userRepository.read(1L).get()));
 
     }
 
     @Test
-    void testGetDuration() {
-        assertEquals(510, this.planRepository.read(1L).get().getDuration());
+    void testDuration() {
+        assertEquals(510, this.planRepository.read(1L).get().duration());
     }
 
     @Test

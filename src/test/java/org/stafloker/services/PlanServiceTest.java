@@ -57,7 +57,7 @@ class PlanServiceTest {
     @Test
     void testAddActivity() {
         this.planService.addActivity(2L, 3L, this.session.getSecuredUser());
-        assertEquals(600, this.planRepository.read(2L).get().getDuration());
+        assertEquals(600, this.planRepository.read(2L).get().duration());
     }
 
     @Test
