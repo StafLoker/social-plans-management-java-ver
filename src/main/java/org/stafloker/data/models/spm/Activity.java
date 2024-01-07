@@ -1,8 +1,8 @@
 package org.stafloker.data.models.spm;
 
+import jakarta.validation.constraints.Min;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.stafloker.data.models.exceptions.InvalidAttributeException;
 
 import jakarta.persistence.*;
 
@@ -32,16 +32,10 @@ public class Activity {
     @Column(nullable = false, precision = 2)
     private Double price;
     @Column
+    @Min(value = MIN_CAPACITY, message = "Minimum capacity is " + MIN_CAPACITY)
     private Integer capacity;
 
     public Double getPrice(Integer age) {
         return this.price;
-    }
-
-    public void setCapacity(Integer capacity) {
-        if (capacity < MIN_CAPACITY) {
-            throw new InvalidAttributeException("Minimum capacity is " + MIN_CAPACITY + ": " + capacity);
-        }
-        this.capacity = capacity;
     }
 }

@@ -1,5 +1,6 @@
 package org.stafloker.data.models.spm;
 
+import jakarta.validation.constraints.Min;
 import lombok.*;
 
 import jakarta.persistence.*;
@@ -38,6 +39,7 @@ public class Plan {
     @Column(nullable = false)
     private String meetingPlace;
     @Column
+    @Min(value = MIN_CAPACITY, message = "Minimum capacity is " + MIN_CAPACITY)
     private Integer capacity;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -90,12 +92,5 @@ public class Plan {
 
     public Integer duration() {
         return this.activitiesList.stream().mapToInt(activity -> activity.getDuration() + TIME_DISPLACEMENT).sum();
-    }
-
-    public void setCapacity(Integer capacity) {
-        if (capacity < MIN_CAPACITY) {
-            throw new InvalidAttributeException("Minimum capacity is " + MIN_CAPACITY + ": " + capacity);
-        }
-        this.capacity = capacity;
     }
 }

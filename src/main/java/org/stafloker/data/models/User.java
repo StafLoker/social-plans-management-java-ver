@@ -1,8 +1,9 @@
 package org.stafloker.data.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.stafloker.data.models.exceptions.InvalidAttributeException;
+import org.stafloker.data.models.validations.AgeConstraint;
 
 @Data
 @NoArgsConstructor
@@ -12,9 +13,9 @@ import org.stafloker.data.models.exceptions.InvalidAttributeException;
 @Entity
 @Table(name = "users")
 public class User {
-    private static final int MIN_AGE = 14;
-    private static final int MAX_AGE = 100;
-    private static final int MIN_LONG_PASSWORD = 3;
+    public static final int MIN_AGE = 14;
+    public static final int MAX_AGE = 100;
+    public static final int MIN_LONG_PASSWORD = 3;
 
     @Id
     @EqualsAndHashCode.Include
@@ -25,22 +26,10 @@ public class User {
     private String name;
     @Column(nullable = false, unique = true)
     private String mobile;
+    @Size(min = MIN_LONG_PASSWORD, message = "The password must be at least 3 characters long")
     @Column(nullable = false)
     private String password;
+    @AgeConstraint
     @Column(nullable = false)
     private Integer age;
-
-    public void setPassword(String password) {
-        if (password.length() < MIN_LONG_PASSWORD) {
-            throw new InvalidAttributeException("Password has less than three characters: " + password);
-        }
-        this.password = password;
-    }
-
-    public void setAge(Integer age) {
-        if (age < MIN_AGE || age > MAX_AGE) {
-            throw new InvalidAttributeException("Age is not in your range [" + MIN_AGE + "," + MAX_AGE + "]: " + age);
-        }
-        this.age = age;
-    }
 }
