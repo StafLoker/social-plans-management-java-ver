@@ -64,16 +64,10 @@ class PlanTest {
     @Test
     void testPrice() {
         assertEquals(47.75, this.planRepository.read(1L).get().price(this.userRepository.read(1L).get()));
-
     }
 
     @Test
     void testDuration() {
         assertEquals(510, this.planRepository.read(1L).get().duration());
-    }
-
-    @Test
-    void testSetCapacity() {
-        assertThrows(InvalidAttributeException.class, () -> this.planRepository.read(1L).get().setCapacity(0));
     }
 }

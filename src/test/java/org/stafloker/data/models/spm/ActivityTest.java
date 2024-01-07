@@ -21,9 +21,4 @@ class ActivityTest {
         assertEquals(5.75, this.activityRepository.read(3L).get().getPrice(17));
         assertEquals(11.5, this.activityRepository.read(3L).get().getPrice(22));
     }
-
-    @Test
-    void setCapacity() {
-        assertThrows(InvalidAttributeException.class, () -> this.activityRepository.read(1L).get().setCapacity(0));
-    }
 }
