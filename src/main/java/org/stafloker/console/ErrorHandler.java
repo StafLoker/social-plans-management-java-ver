@@ -1,6 +1,8 @@
 package org.stafloker.console;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
@@ -27,8 +29,12 @@ public class ErrorHandler {
                 exit = this.commandLineInterface.runCommands();
             } catch (SecurityProhibitionException securityProhibitionException) {
                 this.view.showErrorWithComment("Oops...", securityProhibitionException.getMessage());
+            } catch (ConstraintViolationException constraintViolationException) {
+                for (ConstraintViolation<?> violation : constraintViolationException.getConstraintViolations()) {
+                    this.view.showErrorWithComment("ERROR", violation.getMessage());
+                }
             } catch (Exception e) {
-                this.view.showErrorWithComment("ERROR!", e.getMessage());
+                this.view.showErrorWithComment("ERROR", e.getMessage());
             }
         }
         this.view.show("Goodbye!");
