@@ -124,9 +124,9 @@ public class PlanService {
 
     public List<Plan> weekendPlans() {
         LocalDateTime nextEndOfFriday = LocalDateTime.now().with(TemporalAdjusters.next(DayOfWeek.FRIDAY)).withHour(23).withMinute(59).withSecond(59);
-        LocalDateTime nextBeginningOfMonday = nextEndOfFriday.plusDays(2);
+        LocalDateTime nextMonday = nextEndOfFriday.plusDays(2).plusSeconds(1);
         return this.availablePlans().stream()
-                .filter(plan -> plan.getDate().isAfter(nextEndOfFriday) && plan.getDate().isBefore(nextBeginningOfMonday))
+                .filter(plan -> plan.getDate().isAfter(nextEndOfFriday) && plan.getDate().isBefore(nextMonday))
                 .toList();
     }
 
