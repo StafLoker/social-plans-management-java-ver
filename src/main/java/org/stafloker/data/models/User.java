@@ -19,12 +19,14 @@ public class User {
     @NotNull
     @EqualsAndHashCode.Include
     private Long id;
-    @NotNull
     @NotBlank
     private String name;
+    @NotBlank
     private String mobile;
+    @NotNull
     @Size(min = MIN_LONG_PASSWORD, message = "The password must be at least 3 characters long")
     private String password;
+    @NotNull
     @AgeConstraint
     private Integer age;
 }

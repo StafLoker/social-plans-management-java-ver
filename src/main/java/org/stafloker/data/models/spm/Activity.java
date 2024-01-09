@@ -19,8 +19,11 @@ public class Activity {
     private Long id;
     @NotBlank
     private String name;
+    @NotNull
     private String description;
+    @NotNull
     private Integer duration;
+    @NotNull
     private Double price;
     @Min(value = MIN_CAPACITY, message = "Minimum capacity is " + MIN_CAPACITY)
     private Integer capacity;
