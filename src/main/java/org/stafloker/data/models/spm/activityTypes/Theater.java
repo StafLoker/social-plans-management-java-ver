@@ -4,12 +4,8 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.stafloker.data.models.spm.Activity;
 
-import jakarta.persistence.*;
-
-@Entity
 @SuperBuilder
 @NoArgsConstructor
-@DiscriminatorValue("Theater")
 public class Theater extends Activity {
     private static final double YOUTH_THEATER_DISCOUNT = 0.50;
     private static final double SENIOR_CITIZEN_THEATER_DISCOUNT = 0.70;

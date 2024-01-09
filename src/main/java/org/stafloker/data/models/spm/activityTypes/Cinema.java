@@ -4,12 +4,8 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.stafloker.data.models.spm.Activity;
 
-import jakarta.persistence.*;
-
-@Entity
 @SuperBuilder
 @NoArgsConstructor
-@DiscriminatorValue("Cinema")
 public class Cinema extends Activity {
     private static final int MAX_YOUTH_MOVIE_DISCOUNT_AGE = 21;
     private static final double YOUTH_MOVIE_DISCOUNT = 0.50;

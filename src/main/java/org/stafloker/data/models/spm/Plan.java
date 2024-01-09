@@ -1,9 +1,9 @@
 package org.stafloker.data.models.spm;
 
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
-
-import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
@@ -18,43 +18,25 @@ import org.stafloker.data.models.exceptions.InvalidAttributeException;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Entity
-@Table(name = "plans")
 public class Plan {
     private static final int MIN_CAPACITY = 1;
     private static final int TIME_DISPLACEMENT = 20;
 
-    @Id
+    @NotNull
     @EqualsAndHashCode.Include
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "owner_id")
+    @NotNull
     private User owner;
-    @Column(nullable = false)
+    @NotBlank
     private String name;
-    @Column(nullable = false)
+    @NotNull
     private LocalDateTime date;
-    @Column(nullable = false)
+    @NotBlank
     private String meetingPlace;
-    @Column
     @Min(value = MIN_CAPACITY, message = "Minimum capacity is " + MIN_CAPACITY)
     private Integer capacity;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "plan_subscribers",
-            joinColumns = @JoinColumn(name = "plan_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
     @Builder.Default
     private List<User> subscribersList = new LinkedList<>();
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "plan_activities",
-            joinColumns = @JoinColumn(name = "plan_id"),
-            inverseJoinColumns = @JoinColumn(name = "activity_id")
-    )
     @Builder.Default
     private List<Activity> activitiesList = new LinkedList<>();
 

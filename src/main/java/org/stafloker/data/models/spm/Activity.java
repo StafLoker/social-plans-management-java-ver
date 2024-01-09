@@ -1,37 +1,30 @@
 package org.stafloker.data.models.spm;
 
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-
-import jakarta.persistence.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Entity
-@Table(name = "activities")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 public class Activity {
     private static final int MIN_CAPACITY = 1;
 
-    @Id
     @EqualsAndHashCode.Include
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @NotNull
     private Long id;
-    @Column(nullable = false)
+    @NotBlank
     private String name;
-    @Column(nullable = false)
+    @NotNull
     private String description;
-    @Column(nullable = false)
+    @NotNull
     private Integer duration;
-    @Column(nullable = false, precision = 2)
+    @NotNull
     private Double price;
-    @Column
     @Min(value = MIN_CAPACITY, message = "Minimum capacity is " + MIN_CAPACITY)
     private Integer capacity;
 
