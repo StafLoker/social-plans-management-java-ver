@@ -19,11 +19,11 @@ public class UserService {
     public User create(User user) {
         this.userRepository.findByName(user.getName())
                 .ifPresent(existingUser -> {
-                    throw new DuplicateException("The username already exists and must be unique: " + user.getName());
+                    throw new DuplicateException("The username already exists: " + user.getName());
                 });
         this.userRepository.findByMobile(user.getMobile())
                 .ifPresent(existingUser -> {
-                    throw new DuplicateException("The mobile number already exists and must be unique: " + user.getMobile());
+                    throw new DuplicateException("The mobile number already exists: " + user.getMobile());
                 });
         return this.userRepository.create(user);
     }

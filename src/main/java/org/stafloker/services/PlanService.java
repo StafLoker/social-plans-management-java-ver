@@ -48,7 +48,7 @@ public class PlanService {
     public Plan addActivity(Long planId, Long activityId, User user) {
         Optional<Plan> plan = this.planRepository.read(planId);
         if (plan.isEmpty()) {
-            throw new NotFoundException("The plan with ID: " + planId + " does not exist");
+            throw new NotFoundException("The plan with ID: " + planId);
         }
         if (!plan.get().getOwner().equals(user)) {
             throw new SecurityProhibitionException("To add activities to the plan with ID: " + plan.get().getId() +
@@ -56,7 +56,7 @@ public class PlanService {
         }
         Optional<Activity> activity = this.activityRepository.read(activityId);
         if (activity.isEmpty()) {
-            throw new NotFoundException("The activity with ID: " + activityId + " does not exist");
+            throw new NotFoundException("The activity with ID: " + activityId);
         }
         plan.get().addActivity(activity.get());
         return this.planRepository.update(plan.get());
@@ -65,7 +65,7 @@ public class PlanService {
     public Plan enrollSubscriber(Long planId, User user) {
         Optional<Plan> plan = this.planRepository.read(planId);
         if (plan.isEmpty()) {
-            throw new NotFoundException("The plan with ID: " + planId + " does not exist");
+            throw new NotFoundException("The plan with ID: " + planId);
         }
         if (plan.get().getDate().isBefore(LocalDateTime.now())) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH.mm");
@@ -82,7 +82,7 @@ public class PlanService {
     public double price(Long planId, User user) {
         Optional<Plan> plan = this.planRepository.read(planId);
         if (plan.isEmpty()) {
-            throw new NotFoundException("Plan with ID: " + planId + " does not exist");
+            throw new NotFoundException("Plan with ID: " + planId);
         }
         if (!plan.get().getSubscribersList().contains(user)) {
             throw new SecurityProhibitionException("You cannot check the price of a plan you are not participating in, ID introduced: " + plan.get().getId());
@@ -93,7 +93,7 @@ public class PlanService {
     public int duration(Long planId, User user) {
         Optional<Plan> plan = this.planRepository.read(planId);
         if (plan.isEmpty()) {
-            throw new InvalidAttributeException("Plan with ID: " + planId + " does not exist");
+            throw new InvalidAttributeException("Plan with ID: " + planId);
         }
         if (!plan.get().getSubscribersList().contains(user)) {
             throw new SecurityProhibitionException("You cannot check the duration of a plan you are not participating in, ID introduced: " + plan.get().getId());
@@ -146,5 +146,4 @@ public class PlanService {
                     throw new InvalidAttributeException("You cannot join the plan with ID: " + plan.getId() + " because it overlaps with plan ID: " + pl.getId());
                 });
     }
-
 }
