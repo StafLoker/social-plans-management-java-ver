@@ -1,6 +1,7 @@
 package org.stafloker.data.daos.jpa.entities.spm;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,14 +17,17 @@ import org.stafloker.data.models.spm.Activity;
 @Table(name = "activities")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("Activity")
 public class ActivityEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
-    @Column(nullable = false)
+    @NotNull
     private String name;
+    @NotNull
     private String description;
+    @NotNull
     private Integer duration;
     @Column(nullable = false, precision = 2)
     private Double price;
