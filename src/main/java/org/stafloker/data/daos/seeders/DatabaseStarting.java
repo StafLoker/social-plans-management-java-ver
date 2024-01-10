@@ -4,9 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-
+import org.stafloker.data.daos.UserRepository;
 import org.stafloker.data.models.User;
-import org.stafloker.data.daos.UserRepository;;
 
 @Repository
 public class DatabaseStarting {

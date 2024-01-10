@@ -2,8 +2,8 @@ package org.stafloker.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.stafloker.data.models.spm.Activity;
 import org.stafloker.data.daos.ActivityRepository;
+import org.stafloker.data.models.spm.Activity;
 
 @Service
 public class ActivityService {

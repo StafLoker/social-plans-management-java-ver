@@ -2,8 +2,8 @@ package org.stafloker.console.commands.userCommands;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.stafloker.console.Session;
 import org.stafloker.console.Command;
+import org.stafloker.console.Session;
 
 @Controller
 public class Logout implements Command {

@@ -2,15 +2,15 @@ package org.stafloker.data.daos.seeders;
 
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Repository;
+import org.stafloker.data.daos.ActivityRepository;
+import org.stafloker.data.daos.PlanRepository;
+import org.stafloker.data.daos.UserRepository;
 import org.stafloker.data.models.spm.Activity;
 import org.stafloker.data.models.spm.Plan;
 import org.stafloker.data.models.spm.activityTypes.Cinema;
 import org.stafloker.data.models.spm.activityTypes.Theater;
-import org.stafloker.data.daos.ActivityRepository;
-import org.stafloker.data.daos.PlanRepository;
-import org.stafloker.data.daos.UserRepository;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
