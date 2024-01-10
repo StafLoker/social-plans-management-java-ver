@@ -51,10 +51,6 @@ public class View {
         System.out.println(CYAN + "      - " + command + ORANGE + ":" + helpParameters + CYAN + " " + help + "." + RESET);
     }
 
-    public void showError(String message) {
-        System.out.println(RED + "  >>> " + message + RESET);
-    }
-
     public void showErrorWithComment(String errorMessage, String comment) {
         System.out.println(RED + "  >>> " + errorMessage + " >>> " + SALMON + comment + RESET);
     }
@@ -74,17 +70,6 @@ public class View {
                 "       Password: " + PURPLE + user.getPassword() + CYAN + "\n" +
                 "       Age: " + user.getAge() + "\n" +
                 "       Mobile: " + user.getMobile() +
-                RESET
-        );
-    }
-
-    public void showUsers(User user) {
-        System.out.println(CYAN + "   - " + "User ~> " +
-                "ID: " + user.getId() +
-                " | Name: " + ORANGE + user.getName() + CYAN +
-                " | Password: " + SALMON + user.getPassword() + CYAN +
-                " | Age: " + user.getAge() +
-                " | Mobile: " + user.getMobile() +
                 RESET
         );
     }
@@ -131,18 +116,4 @@ public class View {
                 RESET
         );
     }
-
-    public void showActivities(Activity activity) {
-        System.out.println(CYAN + "   - " + "Activity ~> " +
-                "ID: " + ORANGE + activity.getId() + CYAN +
-                " | Name: " + BLUE + activity.getName() + CYAN +
-                " | Description: " + BLUE + activity.getDescription() + CYAN +
-                " | Type: " + activity.getClass().getSimpleName() +
-                " | Duration: " + BLUE + activity.getDuration() / 60 + " hour/s " + activity.getDuration() % 60 + " minute/s" + CYAN +
-                " | Capacity: " + (activity.getCapacity() == null ? "No limit" : activity.getCapacity()) +
-                " | Price: " + BLUE + activity.getPrice() + " €" +
-                RESET
-        );
-    }
-
 }
