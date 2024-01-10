@@ -98,8 +98,8 @@ public class View {
                 "       Meeting Place: " + plan.getMeetingPlace() + "\n" +
                 "       Capacity: " + (plan.getCapacity() == null ? "No limit" : plan.getCapacity()) + "\n" +
                 "       Available spots: " + (plan.availableSpots() == null ? "No limit" : plan.availableSpots()) + "\n" +
-                "       Activities: " + plan.getActivitiesList().stream().map(Activity::getName).toList() + "\n" +
-                "       Subscribers: " + plan.getSubscribersList().stream().map(User::getName).toList() +
+                "       Activities: " + plan.getActivities().stream().map(Activity::getName).toList() + "\n" +
+                "       Subscribers: " + plan.getSubscribers().stream().map(User::getName).toList() +
                 RESET
         );
     }
@@ -113,8 +113,8 @@ public class View {
                 " | Meeting Place: " + BLUE + plan.getMeetingPlace() + CYAN +
                 " | Capacity: " + (plan.getCapacity() == null ? "No limit" : plan.getCapacity()) +
                 " | Available spots: " + BLUE + (plan.availableSpots() == null ? "No limit" : plan.availableSpots()) + "\n" + CYAN +
-                "       Activities: " + plan.getActivitiesList().stream().map(Activity::getName).toList() + "\n" +
-                "       Subscribers: " + plan.getSubscribersList().stream().map(User::getName).toList() +
+                "       Activities: " + plan.getActivities().stream().map(Activity::getName).toList() + "\n" +
+                "       Subscribers: " + plan.getSubscribers().stream().map(User::getName).toList() +
                 RESET
         );
     }

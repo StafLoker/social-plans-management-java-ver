@@ -11,7 +11,7 @@ import org.stafloker.services.PlanService;
 
 @Controller
 public class PlansContainingKeyword extends PlanCommand implements Command {
-    private static final String VALUE = "plans-keyword";
+    private static final String VALUE = "find-plans-by-keyword";
     private static final String PARAMETER_HELP = "<keyword>";
     private static final String COMMENT_HELP = "Displays plans containing the keyword in their activities";
 

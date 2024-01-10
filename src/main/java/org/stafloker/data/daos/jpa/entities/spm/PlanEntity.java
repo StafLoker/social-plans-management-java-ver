@@ -51,16 +51,16 @@ public class PlanEntity {
     public PlanEntity(Plan plan) {
         BeanUtils.copyProperties(plan, this, "owner", "subscribersList", "activitiesList");
         this.setOwner(new UserEntity(plan.getOwner()));
-        this.setSubscribersList(plan.getSubscribersList().stream().map(UserEntity::new).collect(Collectors.toList()));
-        this.setActivitiesList(plan.getActivitiesList().stream().map(ActivityEntity::new).collect(Collectors.toList()));
+        this.setSubscribersList(plan.getSubscribers().stream().map(UserEntity::new).collect(Collectors.toList()));
+        this.setActivitiesList(plan.getActivities().stream().map(ActivityEntity::new).collect(Collectors.toList()));
     }
 
     public Plan toPlan() {
         Plan plan = new Plan();
         BeanUtils.copyProperties(this, plan, "owner", "subscribersList", "activitiesList");
         plan.setOwner(this.owner.toUser());
-        plan.setSubscribersList(this.subscribersList.stream().map(UserEntity::toUser).collect(Collectors.toList()));
-        plan.setActivitiesList(this.activitiesList.stream().map(ActivityEntity::toActivity).collect(Collectors.toList()));
+        plan.setSubscribers(this.subscribersList.stream().map(UserEntity::toUser).collect(Collectors.toList()));
+        plan.setActivities(this.activitiesList.stream().map(ActivityEntity::toActivity).collect(Collectors.toList()));
         return plan;
     }
 }

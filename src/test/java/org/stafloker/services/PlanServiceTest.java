@@ -59,7 +59,7 @@ class PlanServiceTest {
         this.planService.addActivity(2L, 3L, this.session.getSecuredUser());
         assertEquals(600, this.planRepository.read(2L).get().duration());
         Plan plan = this.planRepository.read(2L).get();
-        plan.getActivitiesList().removeIf(activity -> activity.getId().equals(3L));
+        plan.getActivities().removeIf(activity -> activity.getId().equals(3L));
         this.planRepository.update(plan);
     }
 
@@ -67,15 +67,15 @@ class PlanServiceTest {
     void testEnrollSubscriber() {
         this.session.setLoggedUser(this.userRepository.read(6L).get());
         this.planService.enrollSubscriber(3L, this.session.getSecuredUser());
-        assertTrue(this.planRepository.read(3L).get().getSubscribersList().contains(this.userRepository.read(2L).get()));
-        this.planRepository.read(3L).get().getSubscribersList().remove(this.userRepository.read(1L).get());
+        assertTrue(this.planRepository.read(3L).get().getSubscribers().contains(this.userRepository.read(2L).get()));
+        this.planRepository.read(3L).get().getSubscribers().remove(this.userRepository.read(1L).get());
         this.session.setLoggedUser(this.userRepository.read(1L).get());
 
         this.planService.enrollSubscriber(4L, this.session.getSecuredUser());
         assertThrows(InvalidAttributeException.class, ()-> this.planService.enrollSubscriber(5L, this.session.getSecuredUser()));
         assertThrows(DuplicateException.class, ()->this.planService.enrollSubscriber(4L, this.session.getSecuredUser()));
         Plan tempPlan = this.planRepository.read(4L).get();
-        tempPlan.getSubscribersList().remove(this.session.getSecuredUser());
+        tempPlan.getSubscribers().remove(this.session.getSecuredUser());
         this.planRepository.update(tempPlan);
 
         Plan plan = this.planService.create(Plan.builder().name("Test, past plan").date((LocalDateTime.now().plusDays(-1))).meetingPlace("Callao, Madrid").build(), this.session.getSecuredUser());

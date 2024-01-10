@@ -71,7 +71,7 @@ public class PlanService {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH.mm");
             throw new InvalidAttributeException("The plan with ID: " + plan.get().getId() + " was conducted on: " + plan.get().getDate().format(formatter));
         }
-        if (plan.get().getSubscribersList().contains(user)) {
+        if (plan.get().getSubscribers().contains(user)) {
             throw new DuplicateException("You cannot join a plan twice, ID introduced: " + plan.get().getId());
         }
         checkNoTimeCollisionBetweenSubscribedPlans(plan.get(), user);
@@ -84,7 +84,7 @@ public class PlanService {
         if (plan.isEmpty()) {
             throw new NotFoundException("Plan with ID: " + planId);
         }
-        if (!plan.get().getSubscribersList().contains(user)) {
+        if (!plan.get().getSubscribers().contains(user)) {
             throw new SecurityProhibitionException("You cannot check the price of a plan you are not participating in, ID introduced: " + plan.get().getId());
         }
         return plan.get().price(user);
@@ -95,7 +95,7 @@ public class PlanService {
         if (plan.isEmpty()) {
             throw new InvalidAttributeException("Plan with ID: " + planId);
         }
-        if (!plan.get().getSubscribersList().contains(user)) {
+        if (!plan.get().getSubscribers().contains(user)) {
             throw new SecurityProhibitionException("You cannot check the duration of a plan you are not participating in, ID introduced: " + plan.get().getId());
         }
         return plan.get().duration();
@@ -109,7 +109,7 @@ public class PlanService {
 
     public List<Plan> subscribedPlans(User user) {
         return this.planRepository.findAll().stream()
-                .filter(plan -> plan.getSubscribersList().contains(user))
+                .filter(plan -> plan.getSubscribers().contains(user))
                 .toList();
     }
 
@@ -132,14 +132,14 @@ public class PlanService {
 
     public List<Plan> plansContainingKeyword(String keyword) {
         return this.availablePlans().stream()
-                .filter(plan -> plan.getActivitiesList().stream()
+                .filter(plan -> plan.getActivities().stream()
                         .anyMatch(activity -> activity.getName().contains(keyword) || activity.getDescription().contains(keyword)))
                 .toList();
     }
 
     private void checkNoTimeCollisionBetweenSubscribedPlans(Plan plan, User user) {
         this.planRepository.findAll().stream()
-                .filter(pl -> pl.getSubscribersList().contains(user))
+                .filter(pl -> pl.getSubscribers().contains(user))
                 .filter(pl -> pl.getDate().isBefore(plan.getDate().plusMinutes(plan.duration())) && pl.getDate().plusMinutes(pl.duration()).isAfter(plan.getDate()))
                 .findAny()
                 .ifPresent(pl -> {
