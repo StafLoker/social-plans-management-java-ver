@@ -6,7 +6,7 @@ import org.stafloker.data.models.User;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends GenericRepository<User>{
+public interface UserRepository extends GenericRepository<User> {
 
     Optional<User> findByName(String name);
 

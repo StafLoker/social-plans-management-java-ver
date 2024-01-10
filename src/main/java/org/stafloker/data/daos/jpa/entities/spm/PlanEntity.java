@@ -2,7 +2,10 @@ package org.stafloker.data.daos.jpa.entities.spm;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.stafloker.data.daos.jpa.entities.UserEntity;
 import org.stafloker.data.models.spm.Plan;
