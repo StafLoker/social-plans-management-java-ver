@@ -35,7 +35,7 @@ public class CreateActivity implements Command {
             throw new UnsupportedAttributesException(this.helpParameters());
         }
         Activity createdActivity = this.activityService.create(this.createActivityBasedOnType(values));
-        this.view.showActivity(createdActivity);
+        this.view.showActivity(createdActivity.getId(), createdActivity.getName(), createdActivity.getDescription(), createdActivity.getClass().getSimpleName(), createdActivity.getDuration(), createdActivity.getCapacity(), createdActivity.getPrice());
     }
 
     @Override

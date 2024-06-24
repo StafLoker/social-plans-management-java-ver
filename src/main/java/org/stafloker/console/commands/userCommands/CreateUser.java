@@ -34,7 +34,7 @@ public class CreateUser implements Command {
                 .age(Integer.parseInt(values[2]))
                 .mobile(values[3].replace(" ", ""))
                 .build());
-        this.view.showUser(createdUser);
+        this.view.showUser(createdUser.getId(), createdUser.getName(), createdUser.getPassword(), createdUser.getAge(), createdUser.getMobile());
     }
 
     @Override

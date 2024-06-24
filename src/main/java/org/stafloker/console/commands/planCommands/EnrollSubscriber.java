@@ -7,6 +7,7 @@ import org.stafloker.console.Session;
 import org.stafloker.console.View;
 import org.stafloker.console.exceptions.UnsupportedAttributesException;
 import org.stafloker.data.models.User;
+import org.stafloker.data.models.spm.Plan;
 import org.stafloker.services.PlanService;
 
 @Controller
@@ -32,7 +33,8 @@ public class EnrollSubscriber implements Command {
         if (values.length != 1) {
             throw new UnsupportedAttributesException(this.helpParameters());
         }
-        this.view.showPlan(this.planService.enrollSubscriber(Long.parseLong(values[0]), user));
+        Plan plan = this.planService.enrollSubscriber(Long.parseLong(values[0]), user);
+        this.view.showPlan(plan.getId(), plan.getName(), plan.getOwner().getName(), plan.getDate(), plan.getMeetingPlace(), plan.getCapacity(), plan.availableSpots(), plan.getActivities().stream().map(activity -> activity.getName()).toList(), plan.getSubscribers().stream().map(subscriber -> subscriber.getName()).toList());
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.stafloker.console.Session;
 import org.stafloker.console.View;
 import org.stafloker.console.commands.planCommands.PlanCommand;
 import org.stafloker.data.models.User;
+import org.stafloker.data.models.spm.Activity;
 import org.stafloker.services.PlanService;
 
 @Controller
@@ -31,7 +32,7 @@ public class SubscribedPlans extends PlanCommand implements Command {
     public void execute(String[] values) {
         User user = this.session.getSecuredUser();
         this.sortByDate(this.planService.subscribedPlans(user))
-                .forEach(this.view::showPlans);
+                .forEach(plan ->this.view.showPlanForList(plan.getId(), plan.getName(), plan.getOwner().getName(), plan.getDate(), plan.getMeetingPlace(), plan.getCapacity(), plan.availableSpots(), plan.getActivities().stream().map(Activity::getName).toList(), plan.getSubscribers().stream().map(User::getName).toList()));
     }
 
     @Override

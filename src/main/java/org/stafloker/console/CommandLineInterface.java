@@ -8,11 +8,10 @@ import java.util.*;
 
 @Controller
 public class CommandLineInterface {
-    public static final String DELIMITER_COLON_OR_RETURN = "[:,\\r\\n]";
-
     private static final String VALUE_HELP = "help";
     private static final String HELP_PARAMETERS_HELP = "";
     private static final String HELP_COMMENT_HELP = "Shows help";
+
     private static final String VALUE_EXIT = "exit";
     private static final String HELP_PARAMETERS_EXIT = "";
     private static final String HELP_COMMENT_EXIT = "Terminates execution";
@@ -40,28 +39,27 @@ public class CommandLineInterface {
     }
 
     public boolean runCommands() {
-        Scanner scanner = new Scanner(System.in).useDelimiter(DELIMITER_COLON_OR_RETURN);
         boolean exit = false;
         while (!exit) {
-            exit = runCommand(scanner);
+            exit = runCommand();
         }
         return true;
     }
 
-    private boolean runCommand(Scanner scanner) {
+    private boolean runCommand() {
         this.view.showCommand(this.session.getLoggedUser().isPresent() ? "-" + this.session.getLoggedUser().get().getName() : "");
-        String commandValue = scanner.next().trim().toLowerCase();
+        String[] input = this.view.enterCommand();
         boolean exit = false;
 
-        if (VALUE_HELP.equals(commandValue)) {
+        if (VALUE_HELP.equals(input[0])) {
             this.showHelp();
-        } else if (VALUE_EXIT.equals(commandValue)) {
+        } else if (VALUE_EXIT.equals(input[0])) {
             exit = true;
         } else {
-            if (this.commands.containsKey(commandValue)) {
-                this.commands.get(commandValue).execute(readArguments(scanner));
+            if (this.commands.containsKey(input[0])) {
+                this.commands.get(input[0]).execute(Arrays.copyOfRange(input, 1, input.length));
             } else {
-                throw new UnsupportedOperationException("Command '" + commandValue + "' does not exist.");
+                throw new UnsupportedOperationException("Command '" + input[0] + "' does not exist.");
             }
         }
 
@@ -75,36 +73,20 @@ public class CommandLineInterface {
         this.view.showHelp(this.classifyByType(), generalCommands);
     }
 
-    private Map<String, List<Command>> classifyByType() {
-        Map<String, List<Command>> categorizedCommands = new HashMap<>();
+    private Map<String, List<String[]>> classifyByType() {
+        Map<String, List<String[]>> categorizedCommands = new HashMap<>();
         categorizedCommands.put("user", new ArrayList<>());
         categorizedCommands.put("plan", new ArrayList<>());
         categorizedCommands.put("activity", new ArrayList<>());
         for (Command command : this.commands.values()) {
             if (command.value().contains("user") || command.value().contains("login") || command.value().contains("logout")) {
-                categorizedCommands.get("user").add(command);
+                categorizedCommands.get("user").add(new String[]{command.value(), command.helpParameters(), command.helpComment()});
             } else if (command.value().contains("plan")) {
-                categorizedCommands.get("plan").add(command);
+                categorizedCommands.get("plan").add(new String[]{command.value(), command.helpParameters(), command.helpComment()});
             } else {
-                categorizedCommands.get("activity").add(command);
+                categorizedCommands.get("activity").add(new String[]{command.value(), command.helpParameters(), command.helpComment()});
             }
         }
         return categorizedCommands;
-    }
-
-    private String[] readArguments(Scanner scanner) {
-        String input = scanner.nextLine().trim();
-        if (!input.isBlank()) {
-            return filterParameterSpaces(input.replaceFirst(":", "").split(";"));
-        } else {
-            return new String[0];
-        }
-    }
-
-    private String[] filterParameterSpaces(String[] values) {
-        for (int i = 0; i < values.length; i++) {
-            values[i] = values[i].trim();
-        }
-        return values;
     }
 }
