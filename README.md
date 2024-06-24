@@ -7,7 +7,7 @@ activities, via console.
 
 ### Architecture
 
-`SPA`
+`Three Tier`
 
 ### Technologies used
 

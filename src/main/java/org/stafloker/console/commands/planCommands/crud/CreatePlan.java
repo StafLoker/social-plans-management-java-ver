@@ -52,7 +52,7 @@ public class CreatePlan implements Command {
                     .meetingPlace(values[2])
                     .build(), user);
         }
-        this.view.showPlan(createdPlan);
+        this.view.showPlan(createdPlan.getId(), createdPlan.getName(), createdPlan.getOwner().getName(), createdPlan.getDate(), createdPlan.getMeetingPlace(), createdPlan.getCapacity(), createdPlan.availableSpots(), createdPlan.getActivities().stream().map(activity -> activity.getName()).toList(), createdPlan.getSubscribers().stream().map(subscriber -> subscriber.getName()).toList());
     }
 
     @Override
