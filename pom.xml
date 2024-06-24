@@ -15,6 +15,7 @@
     <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
+    <description>Three Tier patron architecture</description>
 
     <properties>
         <!-- Encode -->
