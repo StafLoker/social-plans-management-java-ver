@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.stafloker.TestConfig;
 import org.stafloker.data.daos.UserRepository;
+import org.stafloker.services.Session;
 import org.stafloker.services.exceptions.SecurityAuthorizationException;
 
 import static org.junit.jupiter.api.Assertions.*;

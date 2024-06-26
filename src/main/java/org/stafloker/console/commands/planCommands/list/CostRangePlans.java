@@ -3,13 +3,13 @@ package org.stafloker.console.commands.planCommands.list;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.stafloker.console.Command;
-import org.stafloker.console.Session;
 import org.stafloker.console.View;
 import org.stafloker.console.commands.planCommands.PlanCommand;
 import org.stafloker.console.exceptions.UnsupportedAttributesException;
 import org.stafloker.data.models.User;
 import org.stafloker.data.models.spm.Activity;
 import org.stafloker.services.PlanService;
+import org.stafloker.services.Session;
 
 @Controller
 public class CostRangePlans extends PlanCommand implements Command {
@@ -35,7 +35,7 @@ public class CostRangePlans extends PlanCommand implements Command {
         if (values.length != 2) {
             throw new UnsupportedAttributesException(this.helpParameters());
         }
-        this.sortByDate(this.planService.priceRangePlans(Double.parseDouble(values[0]), Double.parseDouble(values[1]), this.session.getSecuredUser()))
+        this.sortByDate(this.planService.priceRangePlans(Double.parseDouble(values[0]), Double.parseDouble(values[1])))
                 .forEach(plan -> this.view.showPlanForList(plan.getId(), plan.getName(), plan.getOwner().getName(), plan.getDate(), plan.getMeetingPlace(), plan.getCapacity(), plan.availableSpots(), plan.getActivities().stream().map(Activity::getName).toList(), plan.getSubscribers().stream().map(User::getName).toList()));
     }
 

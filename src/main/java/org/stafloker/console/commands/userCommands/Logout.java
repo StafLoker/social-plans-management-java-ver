@@ -3,7 +3,7 @@ package org.stafloker.console.commands.userCommands;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.stafloker.console.Command;
-import org.stafloker.console.Session;
+import org.stafloker.services.UserService;
 
 @Controller
 public class Logout implements Command {
@@ -11,16 +11,16 @@ public class Logout implements Command {
     private static final String PARAMETER_HELP = "";
     private static final String COMMENT_HELP = "Ends the session";
 
-    private final Session session;
+    private final UserService userService;
 
     @Autowired
-    public Logout(Session session) {
-        this.session = session;
+    public Logout(UserService  userService) {
+        this.userService = userService;
     }
 
     @Override
     public void execute(String[] values) {
-        this.session.setLoggedUser(null);
+        this.userService.logOut();
     }
 
     @Override

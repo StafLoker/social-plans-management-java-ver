@@ -3,11 +3,10 @@ package org.stafloker.console.commands.planCommands.crud;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.stafloker.console.Command;
-import org.stafloker.console.Session;
 import org.stafloker.console.View;
 import org.stafloker.console.exceptions.UnsupportedAttributesException;
-import org.stafloker.data.models.User;
 import org.stafloker.services.PlanService;
+import org.stafloker.services.Session;
 
 @Controller
 public class DeletePlan implements Command {
@@ -28,11 +27,11 @@ public class DeletePlan implements Command {
 
     @Override
     public void execute(String[] values) {
-        User user = this.session.getSecuredUser();
+        this.session.assertLogin();
         if (values.length != 1) {
             throw new UnsupportedAttributesException(this.helpParameters());
         }
-        this.planService.delete(Long.parseLong(values[0]), user);
+        this.planService.delete(Long.parseLong(values[0]));
         this.view.showResult("Plan with id=" + values[0] + " deleted successfully");
     }
 

@@ -28,13 +28,8 @@ public class CreateUser implements Command {
         if (values.length != 4) {
             throw new UnsupportedAttributesException(this.helpParameters());
         }
-        User createdUser = this.userService.create(User.builder()
-                .name(values[0])
-                .password(values[1])
-                .age(Integer.parseInt(values[2]))
-                .mobile(values[3].replace(" ", ""))
-                .build());
-        this.view.showUser(createdUser.getId(), createdUser.getName(), createdUser.getPassword(), createdUser.getAge(), createdUser.getMobile());
+        User user = this.userService.create(values[0], values[1], Integer.parseInt(values[2]), values[3].replace(" ", ""));
+        this.view.showUser(user.getId(), user.getName(), user.getPassword(), user.getAge(), user.getMobile());
     }
 
     @Override
