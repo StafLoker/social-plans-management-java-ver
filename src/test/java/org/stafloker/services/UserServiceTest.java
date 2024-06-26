@@ -4,13 +4,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.stafloker.TestConfig;
-import org.stafloker.console.Session;
 import org.stafloker.data.daos.UserRepository;
 import org.stafloker.data.models.User;
 import org.stafloker.services.exceptions.DuplicateException;
 import org.stafloker.services.exceptions.SecurityAuthorizationException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestConfig
 class UserServiceTest {
@@ -29,12 +28,19 @@ class UserServiceTest {
 
     @Test
     void testCreate() {
-        assertThrows(DuplicateException.class, () -> this.userService.create(User.builder().name("root").password("root").age(19).mobile("123456789").build()));
-        assertThrows(DuplicateException.class, () -> this.userService.create(User.builder().name("Pepe").password("123").age(19).mobile("111111111").build()));
+        assertThrows(DuplicateException.class, () -> this.userService.create("root", "root", 19, "123456789"));
+        assertThrows(DuplicateException.class, () -> this.userService.create("Pepe", "123", 19, "111111111"));
     }
 
     @Test
-    void testLogin() {
-        assertThrows(SecurityAuthorizationException.class, () -> this.userService.login("NonExistent", "123"));
+    void testLogIn() {
+        assertThrows(SecurityAuthorizationException.class, () -> this.userService.logIn("NonExistent", "123"));
+    }
+
+    @Test
+    void testLogOut() {
+        this.session.setLoggedUser(User.builder().name("Test").password("123").age(45).mobile("111111111").build());
+        this.userService.logOut();
+        assertThrows(SecurityAuthorizationException.class, () -> this.session.assertLogin());
     }
 }
