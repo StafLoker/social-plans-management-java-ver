@@ -3,10 +3,10 @@ package org.stafloker.console.commands.userCommands;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.stafloker.console.Command;
-import org.stafloker.console.Session;
 import org.stafloker.console.View;
 import org.stafloker.console.exceptions.UnsupportedAttributesException;
-import org.stafloker.data.models.User;
+import org.stafloker.console.exceptions.UnsupportedCommandException;
+import org.stafloker.services.Session;
 import org.stafloker.services.UserService;
 
 @Controller
@@ -28,12 +28,14 @@ public class Login implements Command {
 
     @Override
     public void execute(String[] values) {
+        if (this.session.getLoggedUser().isPresent()) {
+            throw new UnsupportedCommandException("You are already logged in.");
+        }
         if (values.length != 2) {
             throw new UnsupportedAttributesException(this.helpParameters());
         }
-        User user = this.userService.login(values[0], values[1]);
-        this.session.setLoggedUser(user);
-        this.view.show("Hello, " + user.getName());
+        this.userService.logIn(values[0], values[1]);
+        this.view.show("Hello, " + this.session.getSecuredUser().getName());
     }
 
     @Override
