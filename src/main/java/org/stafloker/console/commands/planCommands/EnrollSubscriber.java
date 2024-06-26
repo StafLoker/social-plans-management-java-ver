@@ -3,12 +3,11 @@ package org.stafloker.console.commands.planCommands;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.stafloker.console.Command;
-import org.stafloker.services.Session;
 import org.stafloker.console.View;
 import org.stafloker.console.exceptions.UnsupportedAttributesException;
-import org.stafloker.data.models.User;
 import org.stafloker.data.models.spm.Plan;
 import org.stafloker.services.PlanService;
+import org.stafloker.services.Session;
 
 @Controller
 public class EnrollSubscriber implements Command {
@@ -29,11 +28,11 @@ public class EnrollSubscriber implements Command {
 
     @Override
     public void execute(String[] values) {
-        User user = this.session.getSecuredUser();
+        this.session.assertLogin();
         if (values.length != 1) {
             throw new UnsupportedAttributesException(this.helpParameters());
         }
-        Plan plan = this.planService.enrollSubscriber(Long.parseLong(values[0]), user);
+        Plan plan = this.planService.enrollSubscriber(Long.parseLong(values[0]));
         this.view.showPlan(plan.getId(), plan.getName(), plan.getOwner().getName(), plan.getDate(), plan.getMeetingPlace(), plan.getCapacity(), plan.availableSpots(), plan.getActivities().stream().map(activity -> activity.getName()).toList(), plan.getSubscribers().stream().map(subscriber -> subscriber.getName()).toList());
     }
 

@@ -3,13 +3,13 @@ package org.stafloker.console.commands.planCommands.list;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.stafloker.console.Command;
-import org.stafloker.services.Session;
 import org.stafloker.console.View;
 import org.stafloker.console.commands.planCommands.PlanCommand;
 import org.stafloker.console.exceptions.UnsupportedAttributesException;
 import org.stafloker.data.models.User;
 import org.stafloker.data.models.spm.Activity;
 import org.stafloker.services.PlanService;
+import org.stafloker.services.Session;
 
 @Controller
 public class PlansContainingKeyword extends PlanCommand implements Command {

@@ -23,34 +23,39 @@ import java.util.Optional;
 public class PlanService {
     private final PlanRepository planRepository;
     private final ActivityRepository activityRepository;
+    private final Session session;
 
     @Autowired
-    public PlanService(PlanRepository planRepository, ActivityRepository activityRepository) {
+    public PlanService(PlanRepository planRepository, ActivityRepository activityRepository, Session session) {
         this.planRepository = planRepository;
         this.activityRepository = activityRepository;
+        this.session = session;
     }
 
-    public Plan create(Plan plan, User user) {
-        plan.setOwner(user);
-        return this.planRepository.create(plan);
+    public Plan create(String name, LocalDateTime date, String meetingPlace, Integer capacity) {
+        Plan.PlanBuilder builder = Plan.builder().name(name).owner(this.session.getSecuredUser()).date(date).meetingPlace(meetingPlace);
+        if (capacity != null) {
+            builder.capacity(capacity);
+        }
+        return this.planRepository.create(builder.build());
     }
 
-    public void delete(Long planId, User user) {
+    public void delete(Long planId) {
         Optional<Plan> plan = this.planRepository.read(planId);
         if (plan.isPresent()) {
-            if (!plan.get().getOwner().equals(user)) {
+            if (!plan.get().getOwner().equals(this.session.getSecuredUser())) {
                 throw new SecurityProhibitionException("To delete the plan with id: " + plan.get().getId());
             }
             this.planRepository.deleteById(planId);
         }
     }
 
-    public Plan addActivity(Long planId, Long activityId, User user) {
+    public Plan addActivity(Long planId, Long activityId) {
         Optional<Plan> plan = this.planRepository.read(planId);
         if (plan.isEmpty()) {
             throw new NotFoundException("The plan with ID: " + planId);
         }
-        if (!plan.get().getOwner().equals(user)) {
+        if (!plan.get().getOwner().equals(this.session.getSecuredUser())) {
             throw new SecurityProhibitionException("To add activities to the plan with ID: " + plan.get().getId() +
                     " you must be the owner; the owner is: " + plan.get().getOwner().getName());
         }
@@ -62,7 +67,7 @@ public class PlanService {
         return this.planRepository.update(plan.get());
     }
 
-    public Plan enrollSubscriber(Long planId, User user) {
+    public Plan enrollSubscriber(Long planId) {
         Optional<Plan> plan = this.planRepository.read(planId);
         if (plan.isEmpty()) {
             throw new NotFoundException("The plan with ID: " + planId);
@@ -71,6 +76,7 @@ public class PlanService {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH.mm");
             throw new InvalidAttributeException("The plan with ID: " + plan.get().getId() + " was conducted on: " + plan.get().getDate().format(formatter));
         }
+        User user = this.session.getSecuredUser();
         if (plan.get().getSubscribers().contains(user)) {
             throw new DuplicateException("You cannot join a plan twice, ID introduced: " + plan.get().getId());
         }
@@ -79,23 +85,24 @@ public class PlanService {
         return this.planRepository.update(plan.get());
     }
 
-    public double price(Long planId, User user) {
+    public double price(Long planId) {
         Optional<Plan> plan = this.planRepository.read(planId);
         if (plan.isEmpty()) {
             throw new NotFoundException("Plan with ID: " + planId);
         }
+        User user = this.session.getSecuredUser();
         if (!plan.get().getSubscribers().contains(user)) {
             throw new SecurityProhibitionException("You cannot check the price of a plan you are not participating in, ID introduced: " + plan.get().getId());
         }
         return plan.get().price(user);
     }
 
-    public int duration(Long planId, User user) {
+    public int duration(Long planId) {
         Optional<Plan> plan = this.planRepository.read(planId);
         if (plan.isEmpty()) {
             throw new InvalidAttributeException("Plan with ID: " + planId);
         }
-        if (!plan.get().getSubscribers().contains(user)) {
+        if (!plan.get().getSubscribers().contains(this.session.getSecuredUser())) {
             throw new SecurityProhibitionException("You cannot check the duration of a plan you are not participating in, ID introduced: " + plan.get().getId());
         }
         return plan.get().duration();
@@ -107,16 +114,17 @@ public class PlanService {
                 .toList();
     }
 
-    public List<Plan> subscribedPlans(User user) {
+    public List<Plan> subscribedPlans() {
         return this.planRepository.findAll().stream()
-                .filter(plan -> plan.getSubscribers().contains(user))
+                .filter(plan -> plan.getSubscribers().contains(this.session.getSecuredUser()))
                 .toList();
     }
 
-    public List<Plan> priceRangePlans(Double price, Double range, User user) {
+    public List<Plan> priceRangePlans(Double price, Double range) {
         if (price < range) {
             throw new InvalidAttributeException("The price " + price + " cannot be less than the range " + range);
         }
+        User user = this.session.getSecuredUser();
         return this.availablePlans().stream()
                 .filter(plan -> plan.price(user) >= price - range && plan.price(user) <= Math.min(price + range, Integer.MAX_VALUE))
                 .toList();
