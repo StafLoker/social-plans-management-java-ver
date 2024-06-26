@@ -3,18 +3,16 @@ package org.stafloker.console.commands.activityCommands;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.stafloker.console.Command;
-import org.stafloker.services.Session;
 import org.stafloker.console.View;
 import org.stafloker.console.exceptions.UnsupportedAttributesException;
 import org.stafloker.data.models.spm.Activity;
-import org.stafloker.data.models.spm.activityTypes.Cinema;
-import org.stafloker.data.models.spm.activityTypes.Theater;
 import org.stafloker.services.ActivityService;
+import org.stafloker.services.Session;
 
 @Controller
 public class CreateActivity implements Command {
     private static final String VALUE = "create-activity";
-    private static final String PARAMETER_HELP = "<name>;<description>;<duration: minutes>;<cost>;<type: Generic, Theatre, Cinema>;<<capacity>>";
+    private static final String PARAMETER_HELP = "<type: Generic, Theatre, Cinema>, <name>;<description>;<duration: minutes>;<cost>;<<capacity>>";
     private static final String COMMENT_HELP = "Create a new activity";
 
     private final Session session;
@@ -31,10 +29,10 @@ public class CreateActivity implements Command {
     @Override
     public void execute(String[] values) {
         this.session.assertLogin();
-        if (values.length < 5 || values.length > 6) {
+        if ((values.length < 5 || values.length > 6) || !(values[0].equalsIgnoreCase("Generic") || values[0].equalsIgnoreCase("Theatre") || values[0].equalsIgnoreCase("Cinema"))) {
             throw new UnsupportedAttributesException(this.helpParameters());
         }
-        Activity createdActivity = this.activityService.create(this.createActivityBasedOnType(values));
+        Activity createdActivity = this.activityService.create(values[0], values[1], values[2], Integer.parseInt(values[3]), Double.parseDouble(values[4]), Integer.parseInt(values[5]));
         this.view.showActivity(createdActivity.getId(), createdActivity.getName(), createdActivity.getDescription(), createdActivity.getClass().getSimpleName(), createdActivity.getDuration(), createdActivity.getCapacity(), createdActivity.getPrice());
     }
 
@@ -51,29 +49,5 @@ public class CreateActivity implements Command {
     @Override
     public String helpComment() {
         return COMMENT_HELP;
-    }
-
-    private Activity createActivityBasedOnType(String[] values) {
-        if (values[4].equalsIgnoreCase("Theatre")) {
-            if (values.length == 5) {
-                return Theater.builder().name(values[0]).description(values[1]).duration(Integer.parseInt(values[2])).price(Double.parseDouble(values[3])).build();
-            } else {
-                return Theater.builder().name(values[0]).description(values[1]).duration(Integer.parseInt(values[2])).price(Double.parseDouble(values[3])).capacity(Integer.parseInt(values[5])).build();
-            }
-        } else if (values[4].equalsIgnoreCase("Cinema")) {
-            if (values.length == 5) {
-                return Cinema.builder().name(values[0]).description(values[1]).duration(Integer.parseInt(values[2])).price(Double.parseDouble(values[3])).build();
-            } else {
-                return Cinema.builder().name(values[0]).description(values[1]).duration(Integer.parseInt(values[2])).price(Double.parseDouble(values[3])).capacity(Integer.parseInt(values[5])).build();
-            }
-        } else if (values[4].equalsIgnoreCase("Generic")) {
-            if (values.length == 5) {
-                return Activity.builder().name(values[0]).description(values[1]).duration(Integer.parseInt(values[2])).price(Double.parseDouble(values[3])).build();
-            } else {
-                return Activity.builder().name(values[0]).description(values[1]).duration(Integer.parseInt(values[2])).price(Double.parseDouble(values[3])).capacity(Integer.parseInt(values[5])).build();
-            }
-        } else {
-            throw new UnsupportedAttributesException(helpParameters());
-        }
     }
 }
