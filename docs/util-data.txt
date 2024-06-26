@@ -5,9 +5,9 @@ login: Peter; 123
 create-plan: Beers; 20-07-2024 20.00; Nuevos Ministerios
 create-activity: Generic; Drinks; Drinks for friends; 30; 20.15
 create-activity: Cinema; Weekend party; Just for friends; 90; 23.35; 15
-plan-add-activity: 7; 8
-plan-add-activity: 7; 9
-plan-join: 7
+plan-add-activity: 1; 1
+plan-add-activity: 1; 2
+plan-join: 1
 subscribed-plans
 
 

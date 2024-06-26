@@ -32,8 +32,14 @@ public class CreateActivity implements Command {
         if ((values.length < 5 || values.length > 6) || !(values[0].equalsIgnoreCase("Generic") || values[0].equalsIgnoreCase("Theatre") || values[0].equalsIgnoreCase("Cinema"))) {
             throw new UnsupportedAttributesException(this.helpParameters());
         }
-        Activity createdActivity = this.activityService.create(values[0], values[1], values[2], Integer.parseInt(values[3]), Double.parseDouble(values[4]), Integer.parseInt(values[5]));
-        this.view.showActivity(createdActivity.getId(), createdActivity.getName(), createdActivity.getDescription(), createdActivity.getClass().getSimpleName(), createdActivity.getDuration(), createdActivity.getCapacity(), createdActivity.getPrice());
+        Activity activity;
+        if (values.length == 5) {
+            activity = this.activityService.create(values[0], values[1], values[2], Integer.parseInt(values[3]), Double.parseDouble(values[4]), null);
+        } else {
+            activity = this.activityService.create(values[0], values[1], values[2], Integer.parseInt(values[3]), Double.parseDouble(values[4]), Integer.parseInt(values[5]));
+        }
+
+        this.view.showActivity(activity.getId(), activity.getName(), activity.getDescription(), activity.getClass().getSimpleName(), activity.getDuration(), activity.getCapacity(), activity.getPrice());
     }
 
     @Override

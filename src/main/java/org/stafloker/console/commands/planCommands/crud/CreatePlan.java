@@ -37,8 +37,13 @@ public class CreatePlan implements Command {
         if (values.length < 3 || values.length > 4) {
             throw new UnsupportedAttributesException(this.helpParameters());
         }
+        Plan plan;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH.mm");
-        Plan plan = this.planService.create(values[0], LocalDateTime.parse(values[1], formatter), values[2], Integer.parseInt(values[3]));
+        if (values.length == 3) {
+            plan = this.planService.create(values[0], LocalDateTime.parse(values[1], formatter), values[2], null);
+        } else {
+            plan = this.planService.create(values[0], LocalDateTime.parse(values[1], formatter), values[2], Integer.parseInt(values[3]));
+        }
         this.view.showPlan(plan.getId(), plan.getName(), plan.getOwner().getName(), plan.getDate(), plan.getMeetingPlace(), plan.getCapacity(), plan.availableSpots(), plan.getActivities().stream().map(Activity::getName).toList(), plan.getSubscribers().stream().map(User::getName).toList());
     }
 
