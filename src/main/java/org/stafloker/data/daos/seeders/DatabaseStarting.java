@@ -24,6 +24,7 @@ public class DatabaseStarting {
     void initialize() {
         LogManager.getLogger(this.getClass()).warn("------- Finding Root -------------");
         if (this.userRepository.findByName(this.name).isEmpty()) {
+            LogManager.getLogger(this.getClass()).warn("        ------- Not Found");
             User user = User.builder().name(this.name).password(this.pass).age(21).mobile("111111111").build();
             this.userRepository.create(user);
             LogManager.getLogger(this.getClass()).warn("------- Created Root -------------");
