@@ -9,9 +9,9 @@ activities, via console.
 
 `Three Tier`
 
-### Technologies used
+### Dependencies
 
-`Maven` `Spring-boot` `Spring-data` `Spring-test`
+`Maven` `Spring-boot` `Spring-data` `Spring-test` `Lombok` `PostgreSQL` `H2 Database` `Log4j`
 
 ### Notes
 
