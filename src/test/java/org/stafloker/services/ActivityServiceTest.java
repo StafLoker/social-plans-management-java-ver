@@ -8,7 +8,7 @@ import org.stafloker.data.daos.ActivityRepository;
 import org.stafloker.data.daos.UserRepository;
 import org.stafloker.data.models.spm.Activity;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestConfig
 class ActivityServiceTest {
@@ -29,7 +29,7 @@ class ActivityServiceTest {
 
     @Test
     void testCreate() {
-        Activity activity = this.activityService.create(Activity.builder().name("Test").description("").duration(300).price(0.0).build());
+        Activity activity = this.activityService.create("Generic", "Test", "", 300, 0.0, null);
         assertEquals("Test", activity.getName());
         this.activityRepository.deleteById(activity.getId());
     }
