@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.stafloker.TestConfig;
-import org.stafloker.console.Session;
 import org.stafloker.data.daos.ActivityRepository;
 import org.stafloker.data.daos.UserRepository;
 import org.stafloker.data.models.spm.Activity;

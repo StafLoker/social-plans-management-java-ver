@@ -1,4 +1,4 @@
-package org.stafloker.console;
+package org.stafloker.services;
 
 import org.springframework.stereotype.Component;
 import org.stafloker.data.models.User;
