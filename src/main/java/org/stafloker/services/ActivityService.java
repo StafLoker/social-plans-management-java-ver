@@ -3,6 +3,7 @@ package org.stafloker.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.stafloker.data.daos.ActivityRepository;
+import org.stafloker.data.models.exceptions.InvalidAttributeException;
 import org.stafloker.data.models.spm.Activity;
 import org.stafloker.data.models.spm.activityTypes.Cinema;
 import org.stafloker.data.models.spm.activityTypes.Theater;
@@ -25,7 +26,7 @@ public class ActivityService {
             case "Theater" -> Theater.builder();
             case "Cinema" -> Cinema.builder();
             case "Generic" -> Activity.builder();
-            default -> throw new IllegalArgumentException("Unsupported activity type: " + type);
+            default -> throw new InvalidAttributeException("Unsupported activity type: " + type);
         };
         builder.name(name).description(description).duration(duration).price(price);
         if (capacity != null) {
