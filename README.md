@@ -13,6 +13,10 @@ activities, via console.
 
 `Maven` `Spring-boot` `Spring-data` `Spring-test` `Lombok` `PostgreSQL` `H2 Database` `Log4j`
 
+### Design Patterns
+
+`Dependency injection (by Spring)` `Builder (by Lombok)` `Command`
+
 ### Notes
 
 #### How to configure `spring.datasource.url=${DATABASE_URL}` from `application-prod.properties` file:
