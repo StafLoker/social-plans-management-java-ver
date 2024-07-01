@@ -73,7 +73,7 @@ public class ViewConsole implements View {
     }
 
     @Override
-    public void showHelp(Map<String, List<String[]>> commandCategories, List<String[]> generalCommands) {
+    public void showHelp(Map<String, List<String[]>> commandCategories) {
         System.out.println(BLUE + "   " + "Sure, I'll help you. Here's a list of possible commands. Just a note, " +
                 "mandatory parameters <parameter>, optional <<parameter>>." + RESET);
         System.out.println(BLUE + "   " + "Just in case, command format (if no parameters, the ':' can be omitted) -->> " +
@@ -85,7 +85,7 @@ public class ViewConsole implements View {
         this.show("Commands related to Activity:");
         commandCategories.get("activity").forEach(com -> this.showCommandHelp(com[0], com[1], com[2]));
         this.show("General Commands:");
-        generalCommands.forEach(com -> this.showCommandHelp(com[0], com[1], com[2]));
+        commandCategories.get("general").forEach(com -> this.showCommandHelp(com[0], com[1], com[2]));
     }
 
     private void showCommandHelp(String command, String helpParameters, String help) {

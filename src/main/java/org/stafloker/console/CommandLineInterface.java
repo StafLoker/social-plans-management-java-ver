@@ -68,10 +68,7 @@ public class CommandLineInterface {
     }
 
     private void showHelp() {
-        List<String[]> generalCommands = new ArrayList<>();
-        generalCommands.add(new String[]{VALUE_HELP, HELP_PARAMETERS_HELP, HELP_COMMENT_HELP});
-        generalCommands.add(new String[]{VALUE_EXIT, HELP_PARAMETERS_EXIT, HELP_COMMENT_EXIT});
-        this.view.showHelp(this.classifyByType(), generalCommands);
+        this.view.showHelp(this.classifyByType());
     }
 
     private Map<String, List<String[]>> classifyByType() {
@@ -88,6 +85,9 @@ public class CommandLineInterface {
                 categorizedCommands.get("activity").add(new String[]{command.value(), command.helpParameters(), command.helpComment()});
             }
         }
+        categorizedCommands.put("general", new ArrayList<>());
+        categorizedCommands.get("general").add(new String[]{VALUE_HELP, HELP_PARAMETERS_HELP, HELP_COMMENT_HELP});
+        categorizedCommands.get("general").add(new String[]{VALUE_EXIT, HELP_PARAMETERS_EXIT, HELP_COMMENT_EXIT});
         return categorizedCommands;
     }
 }

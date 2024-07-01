@@ -9,7 +9,7 @@ import java.util.Map;
 @Controller
 public interface View {
     /**
-     * @return [0] ~ comando , [i>=1] - parametros (si hay)
+     * @return [0] ~ command , [i>=1] - parameters
      */
     String[] enterCommand();
 
@@ -17,7 +17,7 @@ public interface View {
 
     void showCommand(String message);
 
-    void showHelp(Map<String, List<String[]>> commandCategories, List<String[]> generalCommands);
+    void showHelp(Map<String, List<String[]>> commandCategories);
 
     void showErrorWithComment(String errorMessage, String comment);
 
