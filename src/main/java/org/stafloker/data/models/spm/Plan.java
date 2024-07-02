@@ -40,6 +40,9 @@ public class Plan {
     private List<Activity> activities = new LinkedList<>();
 
     public void addSubscriber(User user) {
+        if (this.subscribers.contains(user)) {
+            throw new InvalidAttributeException("User with ID: " + user.getId() + " already exists in the subscribers list.");
+        }
         if (!Objects.isNull(this.capacity)) {
             if (Objects.equals(this.subscribers.size(), this.capacity)) {
                 throw new InvalidAttributeException("Capacity full, cannot add user: " + user.getName());

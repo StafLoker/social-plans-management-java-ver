@@ -24,19 +24,14 @@ class PlanTest {
 
     @Test
     void testAddSubscriber() {
-        Plan plan = this.planRepository.read(3L).get();
+        Plan plan = Plan.builder().name("Test").date(LocalDateTime.now().plusDays(1)).meetingPlace("Callao, Madrid").capacity(1).build();
         plan.addSubscriber(this.userRepository.read(1L).get());
-        assertTrue(plan.getSubscribers().contains(this.userRepository.read(1L).get()));
-        plan.getSubscribers().remove(this.userRepository.read(1L).get());
+        assertThrows(InvalidAttributeException.class, () -> plan.addSubscriber(this.userRepository.read(2L).get()));
 
-        Plan plan2 = Plan.builder().name("Test").date(LocalDateTime.now().plusDays(1)).meetingPlace("Callao, Madrid").capacity(1).build();
+        Plan plan2 = this.planRepository.read(5L).get();
         plan2.addSubscriber(this.userRepository.read(1L).get());
-        assertThrows(InvalidAttributeException.class, () -> plan2.addSubscriber(this.userRepository.read(2L).get()));
-
-        Plan plan3 = this.planRepository.read(5L).get();
-        plan3.addSubscriber(this.userRepository.read(1L).get());
-        assertTrue(plan3.getSubscribers().contains(this.userRepository.read(1L).get()));
-        plan3.getSubscribers().remove(this.userRepository.read(1L).get());
+        assertTrue(plan2.getSubscribers().contains(this.userRepository.read(1L).get()));
+        plan2.getSubscribers().remove(this.userRepository.read(1L).get());
     }
 
     @Test
